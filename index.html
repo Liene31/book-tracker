@@ -66,15 +66,45 @@
             />
           </div>
 
-          <select name="" id="search-select" class="search-select">
-            <option value="">All books</option>
-            <option value="">Want to Read</option>
-            <option value="">Currently Reading</option>
-            <option value="">Finished</option>
+          <select
+            name="search-options"
+            id="search-select"
+            class="search-select"
+          >
+            <option value="all">All books</option>
+            <option value="want">Want to Read</option>
+            <option value="reading">Currently Reading</option>
+            <option value="finished">Finished</option>
           </select>
         </form>
       </section>
-      <section class="cards-wrapper"></section>
+      <section class="books-wrapper">
+        <div class="book-image"></div>
+        <div class="book-info">
+          <h2 class="book-title">Harry Potter</h2>
+          <h3 class="book-author">J. K. Rowling</h3>
+          <select
+            name="status-options"
+            id="status-select"
+            class="status-select"
+          >
+            <option value="want">Want to Read</option>
+            <option value="reading">Currently Reading</option>
+            <option value="finished">Finished</option>
+          </select>
+
+          <div class="book-rating">
+            <button><i class="fa-regular fa-star"></i></button>
+            <button><i class="fa-regular fa-star"></i></button>
+            <button><i class="fa-regular fa-star"></i></button>
+            <button><i class="fa-regular fa-star"></i></button>
+            <button><i class="fa-regular fa-star"></i></button>
+          </div>
+          <p class="book-description">
+            Twist ending kept me guessing until the very end.
+          </p>
+        </div>
+      </section>
     </main>
   </body>
 </html>

@@ -141,6 +141,28 @@ form {
   font-size: 0.7rem;
 }
 
+/* BOOK CARD */
+
+.books-wrapper {
+  max-width: 230px;
+}
+
+.book-image {
+  background-image: url("https://static.wikia.nocookie.net/harrypotter/images/7/7a/Harry_Potter_and_the_Philosopher%27s_Stone_%E2%80%93_Bloomsbury_2014_Children%27s_Edition_%28Paperback_and_Hardcover%29.jpg/revision/latest/scale-to-width-down/1200?cb=20170109041611");
+  width: 100%;
+  height: 200px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 0.5rem;
+}
+
+.book-info {
+  color: #222222;
+  background-color: #faf8ff;
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
 /* 
 #534050
 #975c6b
