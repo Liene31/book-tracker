@@ -66,19 +66,13 @@ main {
 /* DASHBOARD */
 
 .dashboard {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   gap: 1rem;
-  flex-wrap: wrap;
+  text-align: center;
 }
 
 .dashboard-card {
-  display: flex;
-  flex: 1 1 0;
-  flex-direction: column;
-  align-items: center;
-  min-width: 190px;
-  max-width: 50%;
   background-color: #975c6b;
   color: #222222;
   padding: 1rem;
@@ -143,8 +137,10 @@ form {
 
 /* BOOK CARD */
 
-.books-wrapper {
-  max-width: 230px;
+.books {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
 }
 
 .book-image {
@@ -158,9 +154,39 @@ form {
 }
 
 .book-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
   color: #222222;
   background-color: #faf8ff;
   border-radius: 0 0 0.5rem 0.5rem;
+  padding: 0.5rem;
+}
+
+.book-title {
+  font-family: "Merriweather", serif;
+  font-size: 1rem;
+}
+
+.book-author {
+  font-family: "Merriweather", serif;
+  font-size: 0.6rem;
+}
+
+.books select {
+  border-radius: 0.4rem;
+  padding: 0.1rem;
+  font-family: inherit;
+  font-size: 0.7rem;
+}
+
+.book-rating button {
+  border: none;
+  background: none;
+}
+
+.rating {
+  color: orange;
 }
 
 /* 
