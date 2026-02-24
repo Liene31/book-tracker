@@ -18,11 +18,14 @@
       href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap"
       rel="stylesheet"
     />
+    <!-- JS -->
+    <script defer src="./main.js" type="module"></script>
     <!-- CSS -->
     <link rel="stylesheet" href="style.css" />
     <title>Book Tracker</title>
   </head>
   <body>
+    <!-- Header -->
     <header>
       <div class="heading">
         <img src="./images/burning-book.svg" alt="Icon of burning book" />
@@ -34,24 +37,10 @@
       <button class="add-book-btn">+ Add Book</button>
     </header>
     <main>
-      <section class="dashboard">
-        <div class="dashboard-card">
-          <div class="value">4</div>
-          <div class="label">Total books</div>
-        </div>
-        <div class="dashboard-card">
-          <div class="value">1</div>
-          <div class="label">Currently Reading</div>
-        </div>
-        <div class="dashboard-card">
-          <div class="value">1</div>
-          <div class="label">Finished</div>
-        </div>
-        <div class="dashboard-card">
-          <div class="value">2</div>
-          <div class="label">Want to Read</div>
-        </div>
-      </section>
+      <!-- Dashboard Elements -->
+      <section id="dashboard" class="dashboard"></section>
+
+      <!-- Search Field -->
       <section class="search">
         <form>
           <div class="search-wrapper">
@@ -66,6 +55,7 @@
             />
           </div>
 
+          <!-- Search Select Options -->
           <select
             name="search-options"
             id="search-select"
@@ -78,7 +68,9 @@
           </select>
         </form>
       </section>
-      <section class="books">
+
+      <!-- Books Cards -->
+      <section id="books" class="books">
         <div class="book-wrapper">
           <button class="delete-book">
             <i class="delete-icon fa-solid fa-trash-can"></i>
