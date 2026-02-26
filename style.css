@@ -159,14 +159,14 @@ form {
 }
 
 .book-image {
-  background-image: url("https://static.wikia.nocookie.net/harrypotter/images/7/7a/Harry_Potter_and_the_Philosopher%27s_Stone_%E2%80%93_Bloomsbury_2014_Children%27s_Edition_%28Paperback_and_Hardcover%29.jpg/revision/latest/scale-to-width-down/1200?cb=20170109041611");
+  background-image: url("https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1663805647i/136251.jpg");
   position: relative;
   width: 100%;
   height: 200px;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  border-radius: 0.5rem;
+  border-radius: 0.5rem 0.5rem 0 0;
 }
 
 .book-info {
@@ -181,12 +181,12 @@ form {
 
 .book-title {
   font-family: "Merriweather", serif;
-  font-size: 1rem;
+  font-size: 0.8rem;
 }
 
 .book-author {
   font-family: "Merriweather", serif;
-  font-size: 0.6rem;
+  font-size: 0.5rem;
 }
 
 .books select {
@@ -209,33 +209,3 @@ form {
 .book-description {
   font-size: 0.65rem;
 }
-
-/* 
-#534050
-#975c6b
-#d6806e
-#fbb666
-#f9f871
- */
-
-/* <weight>: Use a value from 100 to 900
-<uniquifier>: Use a unique and descriptive class name */
-
-/* .inter-<uniquifier> {
-  font-family: "Inter", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: <weight>;
-  font-style: normal;
-} */
-
-/* <weight>: Use a value from 300 to 900
-<uniquifier>: Use a unique and descriptive class name */
-
-/* .merriweather-<uniquifier> {
-  font-family: "Merriweather", serif;
-  font-optical-sizing: auto;
-  font-weight: <weight>;
-  font-style: normal;
-  font-variation-settings:
-    "wdth" 100;
-} */

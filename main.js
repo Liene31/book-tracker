@@ -1,6 +1,8 @@
 import { dashboardData } from "./dashboardData.js";
 import { bookData } from "./bookData.js";
 
+console.log(bookData[0]);
+
 const dashboardSection = document.getElementById("dashboard");
 const booksSection = document.getElementById("books");
 
@@ -22,69 +24,73 @@ for (let i = 0; i < dashboardData.length; i++) {
 }
 
 // Create Book cards elements in HTML
+for (let i = 0; i < bookData.length; i++) {
+  // Book wrapper
+  const divEl = document.createElement("div");
+  divEl.classList.add("book-wrapper");
 
-// Book wrapper
-const divEl = document.createElement("div");
-divEl.classList.add("book-wrapper");
+  // Delete Btn
+  const deleteBtn = document.createElement("button");
+  const deleteIcon = document.createElement("i");
+  deleteBtn.classList.add("delete-book");
+  deleteIcon.classList.add("delete-icon", "fa-solid", "fa-trash-can");
+  deleteBtn.append(deleteIcon);
 
-// Delete Btn
-const deleteBtn = document.createElement("button");
-const deleteIcon = document.createElement("i");
-deleteBtn.classList.add("delete-book");
-deleteIcon.classList.add("delete-icon", "fa-solid", "fa-trash-can");
-deleteBtn.append(deleteIcon);
+  // Book Cover
+  const imgDiv = document.createElement("div");
+  imgDiv.classList.add("book-image");
+  imgDiv.style.backgroundImage = `url(${bookData[i].coverUrl})`;
 
-// Book Cover
-const imgEl = document.createElement("img");
-imgEl.classList.add("book-image");
+  // Book Info
+  const bookInfoDiv = document.createElement("div");
+  bookInfoDiv.classList.add("book-info");
 
-// Book Info
-const bookInfoDiv = document.createElement("div");
-bookInfoDiv.classList.add("book-info");
+  const titleEl = document.createElement("h2");
+  titleEl.classList.add("book-title");
+  titleEl.textContent = bookData[i].title;
 
-const titleEl = document.createElement("h2");
-titleEl.classList.add("book-title");
-titleEl.textContent = "Harry Potter";
+  const authorEl = document.createElement("h3");
+  authorEl.classList.add("book-author");
+  authorEl.textContent = bookData[i].author;
 
-const authorEl = document.createElement("h3");
-authorEl.classList.add("book-author");
-authorEl.textContent = "J. K. Rowling";
+  // Book Status select
+  const statusSelect = document.createElement("select");
+  statusSelect.classList.add("status-select");
+  statusSelect.id = "status-select";
 
-// Book Status select
-const statusSelect = document.createElement("select");
-statusSelect.classList.add("status-select");
-statusSelect.id = "status-select";
+  const statusOption = document.createElement("option");
+  statusOption.value = "want";
+  statusOption.textContent = bookData[i].status;
 
-const statusOption = document.createElement("option");
-statusOption.value = "want";
-statusOption.textContent = "Want to Read";
+  statusSelect.append(statusOption);
 
-statusSelect.append(statusOption);
+  // Book Rating
+  const bookRatingDiv = document.createElement("div");
+  bookRatingDiv.classList.add("book-rating");
 
-// Book Rating
-const bookRatingDiv = document.createElement("div");
-bookRatingDiv.classList.add("book-rating");
+  const ratingBtn = document.createElement("button");
+  for (let i = 0; i < 5; i++) {
+    const ratingIcon = document.createElement("i");
+    ratingIcon.classList.add("rating", "fa-regular", "fa-star");
+    ratingBtn.append(ratingIcon);
+  }
 
-const ratingBtn = document.createElement("button");
-const ratingIcon = document.createElement("i");
-ratingIcon.classList.add("rating", "fa-regular", "fa-star");
-ratingBtn.append(ratingIcon);
-bookRatingDiv.append(ratingBtn);
+  bookRatingDiv.append(ratingBtn);
 
-// Description paragraph
-const bookDescriptionPara = document.createElement("p");
-bookDescriptionPara.classList.add("book-description");
-bookDescriptionPara.textContent =
-  "Twist ending kept me guessing until the very end.";
+  // Description paragraph
+  const bookDescriptionPara = document.createElement("p");
+  bookDescriptionPara.classList.add("book-description");
+  bookDescriptionPara.textContent = bookData[i].description;
 
-bookInfoDiv.append(
-  titleEl,
-  authorEl,
-  statusSelect,
-  bookRatingDiv,
-  bookDescriptionPara,
-);
+  bookInfoDiv.append(
+    titleEl,
+    authorEl,
+    statusSelect,
+    bookRatingDiv,
+    bookDescriptionPara,
+  );
 
-divEl.append(deleteBtn, imgEl, bookInfoDiv);
+  divEl.append(deleteBtn, imgDiv, bookInfoDiv);
 
-booksSection.append(divEl);
+  booksSection.append(divEl);
+}

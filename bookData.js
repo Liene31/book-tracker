@@ -7,39 +7,39 @@ export const bookData = [
     rating: 5,
     description: "Twist ending kept me guessing until the very end.",
     coverUrl:
-      "https://static.wikia.nocookie.net/harrypotter/images/7/7a/Harry_Potter_and_the_Philosopher%27s_Stone_%E2%80%93_Bloomsbury_2014_Children%27s_Edition_%28Paperback_and_Hardcover%29.jpg/revision/latest/scale-to-width-down/1200?cb=20170109041611",
+      "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1663805647i/136251.jpg",
   },
 
   {
     id: 2,
-    title: "Harry Potter",
-    author: "J. K. Rowling",
+    title: "Bury Our Bones in the Midnight Soil",
+    author: "V.E. Schwab",
     status: "Want to Read",
-    rating: 5,
-    description: "Twist ending kept me guessing until the very end.",
+    rating: 4,
+    description: "Beautiful exploration of parallel lives and choices.",
     coverUrl:
-      "https://static.wikia.nocookie.net/harrypotter/images/7/7a/Harry_Potter_and_the_Philosopher%27s_Stone_%E2%80%93_Bloomsbury_2014_Children%27s_Edition_%28Paperback_and_Hardcover%29.jpg/revision/latest/scale-to-width-down/1200?cb=20170109041611",
+      "https://m.media-amazon.com/images/I/81GBg-ErWZL._AC_UF1000,1000_QL80_.jpg",
   },
 
   {
     id: 3,
-    title: "Harry Potter",
-    author: "J. K. Rowling",
+    title: "Wind and Truth",
+    author: "Brandon Sanderson",
     status: "Want to Read",
-    rating: 5,
-    description: "Twist ending kept me guessing until the very end.",
+    rating: 3,
+    description: "Amazing sci-fi with humor and heart.",
     coverUrl:
-      "https://static.wikia.nocookie.net/harrypotter/images/7/7a/Harry_Potter_and_the_Philosopher%27s_Stone_%E2%80%93_Bloomsbury_2014_Children%27s_Edition_%28Paperback_and_Hardcover%29.jpg/revision/latest/scale-to-width-down/1200?cb=20170109041611",
+      "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1724944713i/203578847.jpg",
   },
 
   {
     id: 4,
-    title: "Harry Potter",
-    author: "J. K. Rowling",
+    title: "Alchemy of Secrets",
+    author: "Stephanie Garber",
     status: "Want to Read",
-    rating: 5,
+    rating: 2,
     description: "Twist ending kept me guessing until the very end.",
     coverUrl:
-      "https://static.wikia.nocookie.net/harrypotter/images/7/7a/Harry_Potter_and_the_Philosopher%27s_Stone_%E2%80%93_Bloomsbury_2014_Children%27s_Edition_%28Paperback_and_Hardcover%29.jpg/revision/latest/scale-to-width-down/1200?cb=20170109041611",
+      "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1743617238i/222706197.jpg",
   },
 ];
