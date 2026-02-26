@@ -1,7 +1,7 @@
 import { dashboardData } from "./dashboardData.js";
 import { bookData } from "./bookData.js";
 
-console.log(bookData[0]);
+// console.log(bookData[0].rating);
 
 const dashboardSection = document.getElementById("dashboard");
 const booksSection = document.getElementById("books");
@@ -69,9 +69,17 @@ for (let i = 0; i < bookData.length; i++) {
   bookRatingDiv.classList.add("book-rating");
 
   const ratingBtn = document.createElement("button");
-  for (let i = 0; i < 5; i++) {
+
+  const rating = bookData[i].rating;
+
+  for (let r = 0; r < 5; r++) {
     const ratingIcon = document.createElement("i");
-    ratingIcon.classList.add("rating", "fa-regular", "fa-star");
+    // evaluates every position
+    // r < rating -> filled star, otherwise empty star
+    r < rating
+      ? ratingIcon.classList.add("rating", "fa-solid", "fa-star")
+      : ratingIcon.classList.add("rating", "fa-regular", "fa-star");
+
     ratingBtn.append(ratingIcon);
   }
 
