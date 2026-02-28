@@ -8,6 +8,7 @@ let wantToRead = 0;
 let reading = 0;
 let finished = 0;
 
+// Counts from bookData, status of each book in order to show it in dashboard
 function countBookStatus(i) {
   if (bookData[i].status === "want") {
     wantToRead++;
@@ -22,6 +23,24 @@ function countBookStatus(i) {
   }
 }
 
+function displayBookCountStatusOnDashboard(status, div) {
+  if (status === "want") {
+    div.textContent = wantToRead;
+  }
+
+  if (status === "reading") {
+    div.textContent = reading;
+  }
+
+  if (status === "finished") {
+    div.textContent = finished;
+  }
+
+  if (status === "all") {
+    div.textContent = wantToRead + finished + reading;
+  }
+}
+
 // Create Dashboard elements in HTML
 function createDashboard() {
   for (let i = 0; i < dashboardData.length; i++) {
@@ -30,21 +49,8 @@ function createDashboard() {
 
     const divValueEl = document.createElement("div");
     divValueEl.classList.add("value");
-    if (dashboardData[i].status === "want") {
-      divValueEl.textContent = wantToRead;
-    }
 
-    if (dashboardData[i].status === "reading") {
-      divValueEl.textContent = reading;
-    }
-
-    if (dashboardData[i].status === "finished") {
-      divValueEl.textContent = finished;
-    }
-
-    if (dashboardData[i].status === "all") {
-      divValueEl.textContent = wantToRead + finished + reading;
-    }
+    displayBookCountStatusOnDashboard(dashboardData[i].status, divValueEl);
 
     const divLabelEl = document.createElement("div");
     divLabelEl.classList.add("label");

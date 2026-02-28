@@ -16,7 +16,7 @@ export const bookData = [
     title: "Bury Our Bones in the Midnight Soil",
     author: "V.E. Schwab",
     label: "Want to Read",
-    status: "reading",
+    status: "want",
     rating: 4,
     description: "Beautiful exploration of parallel lives and choices.",
     coverUrl:
