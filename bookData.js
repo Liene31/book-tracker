@@ -3,7 +3,8 @@ export const bookData = [
     id: 1,
     title: "Harry Potter",
     author: "J. K. Rowling",
-    status: "Want to Read",
+    label: "Want to Read",
+    status: "finished",
     rating: 5,
     description: "Twist ending kept me guessing until the very end.",
     coverUrl:
@@ -14,7 +15,8 @@ export const bookData = [
     id: 2,
     title: "Bury Our Bones in the Midnight Soil",
     author: "V.E. Schwab",
-    status: "Want to Read",
+    label: "Want to Read",
+    status: "reading",
     rating: 4,
     description: "Beautiful exploration of parallel lives and choices.",
     coverUrl:
@@ -25,7 +27,8 @@ export const bookData = [
     id: 3,
     title: "Wind and Truth",
     author: "Brandon Sanderson",
-    status: "Want to Read",
+    label: "Want to Read",
+    status: "want",
     rating: 3,
     description: "Amazing sci-fi with humor and heart.",
     coverUrl:
@@ -36,7 +39,8 @@ export const bookData = [
     id: 4,
     title: "Alchemy of Secrets",
     author: "Stephanie Garber",
-    status: "Want to Read",
+    label: "Want to Read",
+    status: "finished",
     rating: 2,
     description: "Twist ending kept me guessing until the very end.",
     coverUrl:

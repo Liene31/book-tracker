@@ -1,30 +1,63 @@
 import { dashboardData } from "./dashboardData.js";
 import { bookData } from "./bookData.js";
 
-// console.log(bookData[0].rating);
-
 const dashboardSection = document.getElementById("dashboard");
 const booksSection = document.getElementById("books");
 
+let wantToRead = 0;
+let reading = 0;
+let finished = 0;
+
+function countBookStatus(i) {
+  if (bookData[i].status === "want") {
+    wantToRead++;
+  }
+
+  if (bookData[i].status === "reading") {
+    reading++;
+  }
+
+  if (bookData[i].status === "finished") {
+    finished++;
+  }
+}
+
 // Create Dashboard elements in HTML
-for (let i = 0; i < dashboardData.length; i++) {
-  const divEl = document.createElement("div");
-  divEl.classList.add("dashboard-card");
+function createDashboard() {
+  for (let i = 0; i < dashboardData.length; i++) {
+    const divEl = document.createElement("div");
+    divEl.classList.add("dashboard-card");
 
-  const divValueEl = document.createElement("div");
-  divValueEl.classList.add("value");
-  divValueEl.textContent = dashboardData[i].value;
+    const divValueEl = document.createElement("div");
+    divValueEl.classList.add("value");
+    if (dashboardData[i].status === "want") {
+      divValueEl.textContent = wantToRead;
+    }
 
-  const divLabelEl = document.createElement("div");
-  divLabelEl.classList.add("label");
-  divLabelEl.textContent = dashboardData[i].label;
+    if (dashboardData[i].status === "reading") {
+      divValueEl.textContent = reading;
+    }
 
-  divEl.append(divValueEl, divLabelEl);
-  dashboardSection.append(divEl);
+    if (dashboardData[i].status === "finished") {
+      divValueEl.textContent = finished;
+    }
+
+    if (dashboardData[i].status === "all") {
+      divValueEl.textContent = wantToRead + finished + reading;
+    }
+
+    const divLabelEl = document.createElement("div");
+    divLabelEl.classList.add("label");
+    divLabelEl.textContent = dashboardData[i].label;
+
+    divEl.append(divValueEl, divLabelEl);
+    dashboardSection.append(divEl);
+  }
 }
 
 // Create Book cards elements in HTML
 for (let i = 0; i < bookData.length; i++) {
+  countBookStatus(i);
   // Book wrapper
   const divEl = document.createElement("div");
   divEl.classList.add("book-wrapper");
@@ -102,3 +135,4 @@ for (let i = 0; i < bookData.length; i++) {
 
   booksSection.append(divEl);
 }
+createDashboard();

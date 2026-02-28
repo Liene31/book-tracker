@@ -1,18 +1,22 @@
 export const dashboardData = [
   {
-    value: 4,
+    id: 1,
+    status: "all",
     label: "Total books",
   },
   {
-    value: 1,
+    id: 2,
+    status: "reading",
     label: "Currently Reading",
   },
   {
-    value: 1,
+    id: 3,
+    status: "finished",
     label: "Finished",
   },
   {
-    value: 2,
+    id: 4,
+    status: "want",
     label: "Want to Read",
   },
 ];
