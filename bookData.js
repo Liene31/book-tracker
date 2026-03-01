@@ -16,7 +16,7 @@ export const bookData = [
     title: "Bury Our Bones in the Midnight Soil",
     author: "V.E. Schwab",
     label: "Want to Read",
-    status: "want",
+    status: "reading",
     rating: 4,
     description: "Beautiful exploration of parallel lives and choices.",
     coverUrl:
@@ -28,7 +28,7 @@ export const bookData = [
     title: "Wind and Truth",
     author: "Brandon Sanderson",
     label: "Want to Read",
-    status: "want",
+    status: "reading",
     rating: 3,
     description: "Amazing sci-fi with humor and heart.",
     coverUrl:

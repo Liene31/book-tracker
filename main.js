@@ -4,22 +4,27 @@ import { bookData } from "./bookData.js";
 const dashboardSection = document.getElementById("dashboard");
 const booksSection = document.getElementById("books");
 
-let wantToRead = 0;
-let reading = 0;
-let finished = 0;
+let wantToRead;
+let reading;
+let finished;
 
 // Counts from bookData, status of each book in order to show it in dashboard
-function countBookStatus(i) {
-  if (bookData[i].status === "want") {
-    wantToRead++;
-  }
+function countBookStatus() {
+  wantToRead = 0;
+  reading = 0;
+  finished = 0;
+  for (let i = 0; i < bookData.length; i++) {
+    if (bookData[i].status === "want") {
+      wantToRead++;
+    }
 
-  if (bookData[i].status === "reading") {
-    reading++;
-  }
+    if (bookData[i].status === "reading") {
+      reading++;
+    }
 
-  if (bookData[i].status === "finished") {
-    finished++;
+    if (bookData[i].status === "finished") {
+      finished++;
+    }
   }
 }
 
@@ -43,6 +48,7 @@ function displayBookCountStatusOnDashboard(status, div) {
 
 // Create Dashboard elements in HTML
 function createDashboard() {
+  countBookStatus();
   for (let i = 0; i < dashboardData.length; i++) {
     const divEl = document.createElement("div");
     divEl.classList.add("dashboard-card");
@@ -63,7 +69,6 @@ function createDashboard() {
 
 // Create Book cards elements in HTML
 for (let i = 0; i < bookData.length; i++) {
-  countBookStatus(i);
   // Book wrapper
   const divEl = document.createElement("div");
   divEl.classList.add("book-wrapper");
