@@ -103,8 +103,8 @@ for (let i = 0; i < bookData.length; i++) {
   statusSelect.id = "status-select";
 
   const statusOption = document.createElement("option");
-  statusOption.value = "want";
-  statusOption.textContent = bookData[i].status;
+  statusOption.value = bookData[i].status;
+  statusOption.textContent = bookData[i].label;
 
   statusSelect.append(statusOption);
 
