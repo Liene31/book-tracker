@@ -1,5 +1,8 @@
 import { dashboardData } from "./dashboardData.js";
 import { bookData } from "./bookData.js";
+import { bookStatuses } from "./bookStatuses.js";
+
+console.log(bookStatuses);
 
 const dashboardSection = document.getElementById("dashboard");
 const booksSection = document.getElementById("books");
@@ -67,6 +70,22 @@ function createDashboard() {
   }
 }
 
+function createBookStatusOptions(selectedStatus) {
+  const statusSelect = document.createElement("select");
+  statusSelect.classList.add("status-select");
+  statusSelect.name = "status-select";
+
+  for (let s = 0; s < bookStatuses.length; s++) {
+    const statusOption = document.createElement("option");
+    statusOption.value = bookStatuses[s].status;
+    statusOption.textContent = bookStatuses[s].label;
+
+    statusSelect.append(statusOption);
+  }
+  statusSelect.value = selectedStatus;
+  return statusSelect;
+}
+
 // Create Book cards elements in HTML
 for (let i = 0; i < bookData.length; i++) {
   // Book wrapper
@@ -98,15 +117,8 @@ for (let i = 0; i < bookData.length; i++) {
   authorEl.textContent = bookData[i].author;
 
   // Book Status select
-  const statusSelect = document.createElement("select");
-  statusSelect.classList.add("status-select");
-  statusSelect.id = "status-select";
-
-  const statusOption = document.createElement("option");
-  statusOption.value = bookData[i].status;
-  statusOption.textContent = bookData[i].label;
-
-  statusSelect.append(statusOption);
+  const selectedBookStatus = bookData[i].status;
+  const statusSelect = createBookStatusOptions(selectedBookStatus);
 
   // Book Rating
   const bookRatingDiv = document.createElement("div");
