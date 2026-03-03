@@ -2,8 +2,6 @@ import { dashboardData } from "./dashboardData.js";
 import { bookData } from "./bookData.js";
 import { bookStatuses } from "./bookStatuses.js";
 
-console.log(bookStatuses);
-
 const dashboardSection = document.getElementById("dashboard");
 const booksSection = document.getElementById("books");
 
