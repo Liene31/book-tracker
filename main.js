@@ -3,6 +3,7 @@ import { bookData } from "./bookData.js";
 import { bookStatuses } from "./bookStatuses.js";
 
 const dashboardSection = document.getElementById("dashboard");
+const searchOptionsDiv = document.getElementById("search-options-wrapper");
 const booksSection = document.getElementById("books");
 
 let wantToRead;
@@ -67,6 +68,28 @@ function createDashboard() {
     dashboardSection.append(divEl);
   }
 }
+
+//Create search selection options
+const searchOptionSelect = document.createElement("select");
+const filterAllOption = document.createElement("option");
+searchOptionSelect.classList.add("search-select");
+searchOptionSelect.name = "search-options";
+searchOptionSelect.id = "search-select";
+filterAllOption.value = "all";
+filterAllOption.textContent = "All books";
+
+searchOptionSelect.append(filterAllOption);
+
+//Create search selection options
+for (let d = 0; d < bookStatuses.length; d++) {
+  const searchOption = document.createElement("option");
+  searchOption.value = bookStatuses[d].status;
+  searchOption.textContent = bookStatuses[d].label;
+
+  searchOptionSelect.append(searchOption);
+}
+
+searchOptionsDiv.append(searchOptionSelect);
 
 function createBookStatusOptions(selectedStatus) {
   const statusSelect = document.createElement("select");
