@@ -50,6 +50,7 @@ function displayBookCountStatusOnDashboard(status, div) {
 
 // Create Dashboard elements in HTML
 function createDashboard() {
+  dashboardSection.innerHTML = "";
   countBookStatus();
   for (let i = 0; i < dashboardData.length; i++) {
     const divEl = document.createElement("div");
@@ -70,28 +71,30 @@ function createDashboard() {
 }
 
 //Create search selection options
-const searchOptionSelect = document.createElement("select");
-const filterAllOption = document.createElement("option");
-searchOptionSelect.classList.add("search-select");
-searchOptionSelect.name = "search-options";
-searchOptionSelect.id = "search-select";
-filterAllOption.value = "all";
-filterAllOption.textContent = "All books";
+function createFilterOptions() {
+  const searchOptionSelect = document.createElement("select");
+  const filterAllOption = document.createElement("option");
+  searchOptionSelect.classList.add("search-select");
+  searchOptionSelect.name = "search-options";
+  searchOptionSelect.id = "search-select";
+  filterAllOption.value = "all";
+  filterAllOption.textContent = "All books";
 
-searchOptionSelect.append(filterAllOption);
+  searchOptionSelect.append(filterAllOption);
 
-//Create search selection options
-for (let d = 0; d < bookStatuses.length; d++) {
-  const searchOption = document.createElement("option");
-  searchOption.value = bookStatuses[d].status;
-  searchOption.textContent = bookStatuses[d].label;
+  //Create search selection options
+  for (let d = 0; d < bookStatuses.length; d++) {
+    const searchOption = document.createElement("option");
+    searchOption.value = bookStatuses[d].status;
+    searchOption.textContent = bookStatuses[d].label;
 
-  searchOptionSelect.append(searchOption);
+    searchOptionSelect.append(searchOption);
+  }
+
+  searchOptionsDiv.append(searchOptionSelect);
 }
 
-searchOptionsDiv.append(searchOptionSelect);
-
-function createBookStatusOptions(selectedStatus) {
+function createStatusSelect(selectedStatus) {
   const statusSelect = document.createElement("select");
   statusSelect.classList.add("status-select");
   statusSelect.name = "status-select";
@@ -108,75 +111,81 @@ function createBookStatusOptions(selectedStatus) {
 }
 
 // Create Book cards elements in HTML
-for (let i = 0; i < bookData.length; i++) {
-  // Book wrapper
-  const divEl = document.createElement("div");
-  divEl.classList.add("book-wrapper");
+function createBookCards() {
+  booksSection.innerHTML = "";
+  for (let i = 0; i < bookData.length; i++) {
+    // Book wrapper
+    const divEl = document.createElement("div");
+    divEl.classList.add("book-wrapper");
 
-  // Delete Btn
-  const deleteBtn = document.createElement("button");
-  const deleteIcon = document.createElement("i");
-  deleteBtn.classList.add("delete-book");
-  deleteIcon.classList.add("delete-icon", "fa-solid", "fa-trash-can");
-  deleteBtn.append(deleteIcon);
+    // Delete Btn
+    const deleteBtn = document.createElement("button");
+    const deleteIcon = document.createElement("i");
+    deleteBtn.classList.add("delete-book");
+    deleteIcon.classList.add("delete-icon", "fa-solid", "fa-trash-can");
+    deleteBtn.append(deleteIcon);
 
-  // Book Cover
-  const imgDiv = document.createElement("div");
-  imgDiv.classList.add("book-image");
-  imgDiv.style.backgroundImage = `url(${bookData[i].coverUrl})`;
+    // Book Cover
+    const imgDiv = document.createElement("div");
+    imgDiv.classList.add("book-image");
+    imgDiv.style.backgroundImage = `url(${bookData[i].coverUrl})`;
 
-  // Book Info
-  const bookInfoDiv = document.createElement("div");
-  bookInfoDiv.classList.add("book-info");
+    // Book Info
+    const bookInfoDiv = document.createElement("div");
+    bookInfoDiv.classList.add("book-info");
 
-  const titleEl = document.createElement("h2");
-  titleEl.classList.add("book-title");
-  titleEl.textContent = bookData[i].title;
+    const titleEl = document.createElement("h2");
+    titleEl.classList.add("book-title");
+    titleEl.textContent = bookData[i].title;
 
-  const authorEl = document.createElement("h3");
-  authorEl.classList.add("book-author");
-  authorEl.textContent = bookData[i].author;
+    const authorEl = document.createElement("h3");
+    authorEl.classList.add("book-author");
+    authorEl.textContent = bookData[i].author;
 
-  // Book Status select
-  const selectedBookStatus = bookData[i].status;
-  const statusSelect = createBookStatusOptions(selectedBookStatus);
+    // Book Status select
+    const selectedBookStatus = bookData[i].status;
+    const statusSelect = createStatusSelect(selectedBookStatus);
 
-  // Book Rating
-  const bookRatingDiv = document.createElement("div");
-  bookRatingDiv.classList.add("book-rating");
+    // Book Rating
+    const bookRatingDiv = document.createElement("div");
+    bookRatingDiv.classList.add("book-rating");
 
-  const ratingBtn = document.createElement("button");
+    const ratingBtn = document.createElement("button");
 
-  const rating = bookData[i].rating;
+    const rating = bookData[i].rating;
 
-  for (let r = 0; r < 5; r++) {
-    const ratingIcon = document.createElement("i");
-    // evaluates every position
-    // r < rating -> filled star, otherwise empty star
-    r < rating
-      ? ratingIcon.classList.add("rating", "fa-solid", "fa-star")
-      : ratingIcon.classList.add("rating", "fa-regular", "fa-star");
+    for (let r = 0; r < 5; r++) {
+      const ratingIcon = document.createElement("i");
+      // evaluates every position
+      // r < rating -> filled star, otherwise empty star
+      r < rating
+        ? ratingIcon.classList.add("rating", "fa-solid", "fa-star")
+        : ratingIcon.classList.add("rating", "fa-regular", "fa-star");
 
-    ratingBtn.append(ratingIcon);
+      ratingBtn.append(ratingIcon);
+    }
+
+    bookRatingDiv.append(ratingBtn);
+
+    // Description paragraph
+    const bookDescriptionPara = document.createElement("p");
+    bookDescriptionPara.classList.add("book-description");
+    bookDescriptionPara.textContent = bookData[i].description;
+
+    bookInfoDiv.append(
+      titleEl,
+      authorEl,
+      statusSelect,
+      bookRatingDiv,
+      bookDescriptionPara,
+    );
+
+    divEl.append(deleteBtn, imgDiv, bookInfoDiv);
+
+    booksSection.append(divEl);
   }
-
-  bookRatingDiv.append(ratingBtn);
-
-  // Description paragraph
-  const bookDescriptionPara = document.createElement("p");
-  bookDescriptionPara.classList.add("book-description");
-  bookDescriptionPara.textContent = bookData[i].description;
-
-  bookInfoDiv.append(
-    titleEl,
-    authorEl,
-    statusSelect,
-    bookRatingDiv,
-    bookDescriptionPara,
-  );
-
-  divEl.append(deleteBtn, imgDiv, bookInfoDiv);
-
-  booksSection.append(divEl);
 }
+
 createDashboard();
+createFilterOptions();
+createBookCards();
