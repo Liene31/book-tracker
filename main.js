@@ -94,10 +94,11 @@ function createFilterOptions() {
   searchOptionsDiv.append(searchOptionSelect);
 }
 
-function createStatusSelect(selectedStatus) {
+function createStatusSelect(selectedStatus, bookId) {
   const statusSelect = document.createElement("select");
   statusSelect.classList.add("status-select");
   statusSelect.name = "status-select";
+  statusSelect.id = bookId;
 
   for (let s = 0; s < bookStatuses.length; s++) {
     const statusOption = document.createElement("option");
@@ -107,7 +108,28 @@ function createStatusSelect(selectedStatus) {
     statusSelect.append(statusOption);
   }
   statusSelect.value = selectedStatus;
+
+  updateBookStatus(statusSelect);
+
   return statusSelect;
+}
+
+// Update bookData with a new status when user changes it in book info card
+function updateBookStatus(statusSelect) {
+  // event.change detects the change in the status
+  statusSelect.addEventListener("change", (event) => {
+    const newBookStatus = event.target.value;
+    const selectId = event.target.id;
+
+    // identify which book's select status was changed and updates with new value
+    for (let i = 0; i < bookData.length; i++) {
+      if (bookData[i].id === parseInt(selectId)) {
+        bookData[i].status = newBookStatus;
+      }
+    }
+    //if the change in status has happened, update the dashboard with new count
+    createDashboard();
+  });
 }
 
 // Create Book cards elements in HTML
@@ -144,7 +166,9 @@ function createBookCards() {
 
     // Book Status select
     const selectedBookStatus = bookData[i].status;
-    const statusSelect = createStatusSelect(selectedBookStatus);
+    const bookId = bookData[i].id;
+    //Gets from the function Select element to append later to the bookInfoDiv
+    const statusSelect = createStatusSelect(selectedBookStatus, bookId);
 
     // Book Rating
     const bookRatingDiv = document.createElement("div");
