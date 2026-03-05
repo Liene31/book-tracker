@@ -5,6 +5,19 @@ import { bookStatuses } from "./bookStatuses.js";
 const dashboardSection = document.getElementById("dashboard");
 const searchOptionsDiv = document.getElementById("search-options-wrapper");
 const booksSection = document.getElementById("books");
+const searchForm = document.getElementById("search-form");
+const searchFieldInput = document.getElementById("search-field");
+
+//prevent the browser from reloading the page
+searchForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+});
+
+//detect every change while the user types
+searchFieldInput.addEventListener("input", () => {
+  const inputValue = searchFieldInput.value;
+  console.log(inputValue);
+});
 
 let wantToRead;
 let reading;
