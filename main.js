@@ -3,9 +3,9 @@ import { bookData } from "./bookData.js";
 import { bookStatuses } from "./bookStatuses.js";
 
 const dashboardSection = document.getElementById("dashboard");
-const searchOptionsDiv = document.getElementById("search-options-wrapper");
 const booksSection = document.getElementById("books");
 const searchForm = document.getElementById("search-form");
+const searchOptionSelect = document.getElementById("search-select");
 const searchFieldInput = document.getElementById("search-field");
 
 let wantToRead;
@@ -74,11 +74,7 @@ function createDashboard() {
 
 //Create search selection options
 function createFilterOptions() {
-  const searchOptionSelect = document.createElement("select");
   const filterAllOption = document.createElement("option");
-  searchOptionSelect.classList.add("search-select");
-  searchOptionSelect.name = "search-options";
-  searchOptionSelect.id = "search-select";
   filterAllOption.value = "all";
   filterAllOption.textContent = "All books";
 
@@ -92,8 +88,6 @@ function createFilterOptions() {
 
     searchOptionSelect.append(searchOption);
   }
-
-  searchOptionsDiv.append(searchOptionSelect);
 }
 
 function createStatusSelect(selectedStatus, bookId) {
@@ -136,16 +130,34 @@ function updateBookStatus(statusSelect) {
 
 // Search
 
+function handleSearchSelect() {
+  searchOptionSelect.addEventListener("change", (event) => {
+    const filterSelection = event.target.value;
+
+    if (filterSelection === "all") {
+      return createBookCards(bookData);
+    }
+
+    const filteredBooks = bookData.filter((books) => {
+      return books.status === filterSelection;
+    });
+
+    createBookCards(filteredBooks);
+  });
+}
+
+handleSearchSelect();
+
 //prevent the browser from reloading the page
 searchForm.addEventListener("submit", (e) => {
   e.preventDefault();
 });
 
 //detect every change while the user types
-//return the books which match the search
 searchFieldInput.addEventListener("input", () => {
   const inputValue = searchFieldInput.value.toLowerCase();
 
+  //return the books which match the search
   const searchResults = bookData.filter(
     (book) =>
       book.title.toLowerCase().includes(inputValue) ||
