@@ -8,17 +8,6 @@ const booksSection = document.getElementById("books");
 const searchForm = document.getElementById("search-form");
 const searchFieldInput = document.getElementById("search-field");
 
-//prevent the browser from reloading the page
-searchForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-});
-
-//detect every change while the user types
-searchFieldInput.addEventListener("input", () => {
-  const inputValue = searchFieldInput.value;
-  console.log(inputValue);
-});
-
 let wantToRead;
 let reading;
 let finished;
@@ -145,10 +134,31 @@ function updateBookStatus(statusSelect) {
   });
 }
 
+// Search
+
+//prevent the browser from reloading the page
+searchForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+});
+
+//detect every change while the user types
+//return the books which match the search
+searchFieldInput.addEventListener("input", () => {
+  const inputValue = searchFieldInput.value.toLowerCase();
+
+  const searchResults = bookData.filter(
+    (book) =>
+      book.title.toLowerCase().includes(inputValue) ||
+      book.author.toLowerCase().includes(inputValue),
+  );
+
+  createBookCards(searchResults);
+});
+
 // Create Book cards elements in HTML
-function createBookCards() {
+function createBookCards(books) {
   booksSection.innerHTML = "";
-  for (let i = 0; i < bookData.length; i++) {
+  for (let i = 0; i < books.length; i++) {
     // Book wrapper
     const divEl = document.createElement("div");
     divEl.classList.add("book-wrapper");
@@ -163,7 +173,7 @@ function createBookCards() {
     // Book Cover
     const imgDiv = document.createElement("div");
     imgDiv.classList.add("book-image");
-    imgDiv.style.backgroundImage = `url(${bookData[i].coverUrl})`;
+    imgDiv.style.backgroundImage = `url(${books[i].coverUrl})`;
 
     // Book Info
     const bookInfoDiv = document.createElement("div");
@@ -171,15 +181,15 @@ function createBookCards() {
 
     const titleEl = document.createElement("h2");
     titleEl.classList.add("book-title");
-    titleEl.textContent = bookData[i].title;
+    titleEl.textContent = books[i].title;
 
     const authorEl = document.createElement("h3");
     authorEl.classList.add("book-author");
-    authorEl.textContent = bookData[i].author;
+    authorEl.textContent = books[i].author;
 
     // Book Status select
-    const selectedBookStatus = bookData[i].status;
-    const bookId = bookData[i].id;
+    const selectedBookStatus = books[i].status;
+    const bookId = books[i].id;
     //Gets from the function Select element to append later to the bookInfoDiv
     const statusSelect = createStatusSelect(selectedBookStatus, bookId);
 
@@ -189,7 +199,7 @@ function createBookCards() {
 
     const ratingBtn = document.createElement("button");
 
-    const rating = bookData[i].rating;
+    const rating = books[i].rating;
 
     for (let r = 0; r < 5; r++) {
       const ratingIcon = document.createElement("i");
@@ -207,7 +217,7 @@ function createBookCards() {
     // Description paragraph
     const bookDescriptionPara = document.createElement("p");
     bookDescriptionPara.classList.add("book-description");
-    bookDescriptionPara.textContent = bookData[i].description;
+    bookDescriptionPara.textContent = books[i].description;
 
     bookInfoDiv.append(
       titleEl,
@@ -225,4 +235,4 @@ function createBookCards() {
 
 createDashboard();
 createFilterOptions();
-createBookCards();
+createBookCards(bookData);
