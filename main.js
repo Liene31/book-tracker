@@ -130,9 +130,11 @@ function updateBookStatus(statusSelect) {
 
 // Search
 
+let filterSelection;
+
 function handleSearchSelect() {
   searchOptionSelect.addEventListener("change", (event) => {
-    const filterSelection = event.target.value;
+    filterSelection = event.target.value;
 
     if (filterSelection === "all") {
       return createBookCards(bookData);
@@ -148,24 +150,36 @@ function handleSearchSelect() {
 
 handleSearchSelect();
 
-//prevent the browser from reloading the page
-searchForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-});
+function handleSearchInput() {
+  //prevent the browser from reloading the page
+  searchForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+  });
 
-//detect every change while the user types
-searchFieldInput.addEventListener("input", () => {
-  const inputValue = searchFieldInput.value.toLowerCase();
+  //detect every change while the user types
+  searchFieldInput.addEventListener("input", () => {
+    const inputValue = searchFieldInput.value.toLowerCase();
 
-  //return the books which match the search
-  const searchResults = bookData.filter(
-    (book) =>
-      book.title.toLowerCase().includes(inputValue) ||
-      book.author.toLowerCase().includes(inputValue),
-  );
+    //return the books which match the search and status
+    const searchResults = bookData.filter((book) => {
+      if (filterSelection === undefined || filterSelection === "all") {
+        return (
+          book.title.toLowerCase().includes(inputValue) ||
+          book.author.toLowerCase().includes(inputValue)
+        );
+      } else if (filterSelection === book.status) {
+        return (
+          book.title.toLowerCase().includes(inputValue) ||
+          book.author.toLowerCase().includes(inputValue)
+        );
+      }
+    });
 
-  createBookCards(searchResults);
-});
+    createBookCards(searchResults);
+  });
+}
+
+handleSearchInput();
 
 // Create Book cards elements in HTML
 function createBookCards(books) {
