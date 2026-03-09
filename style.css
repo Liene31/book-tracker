@@ -139,8 +139,33 @@ form {
 
 .books {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(3, minmax(220px, 1fr));
   gap: 1rem;
+}
+
+.book-wrapper {
+  width: 100%;
+  max-width: 260px;
+}
+
+@media (max-width: 700px) {
+  .books {
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+  }
+
+  .book-wrapper {
+    max-width: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .books {
+    grid-template-columns: 1fr;
+  }
+
+  .book-wrapper {
+    max-width: none;
+  }
 }
 
 .books .delete-book {
