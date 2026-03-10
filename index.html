@@ -69,39 +69,55 @@
 
       <!-- Add Book Modal -->
       <section class="modal">
+        <!-- <button class="close-book-form">❌</button> -->
+        <!-- <button
+          class="close-book-form fa-regular fa-circle-xmark fa-1x"
+        ></button> -->
+        <button class="close-book-form fa-solid fa-xmark fa-1x"></button>
         <h2>Add New Book</h2>
         <form class="add-book-form">
-          <label for="title">Title*</label>
-          <input type="text" name="title" id="title" />
-
-          <label for="author">Author*</label>
-          <input type="text" name="author" id="author" />
-
-          <label for="book-cover">Cover Image URL</label>
+          <label for="add-book-title">Title*</label>
           <input
             type="text"
-            name="book-cover"
-            id="book-cover"
+            name="add-book-title"
+            id="add-book-title"
+            required
+          />
+
+          <label for="add-book-author">Author*</label>
+          <input
+            type="text"
+            name="add-book-author"
+            id="add-book-author"
+            required
+          />
+
+          <label for="add-book-cover">Cover Image URL</label>
+          <input
+            type="text"
+            name="add-book-cover"
+            id="add-book-cover"
             placeholder="http://example.com/image.jpg"
           />
-          <p class="book-cover-note">Leave blank for default cover</p>
+          <p class="add-book-info">Leave blank for default cover*</p>
 
-          <label for="book-status">Status</label>
-          <select name="book-status" id="book-status">
+          <label for="add-book-status">Status</label>
+          <select name="add-book-status" id="add-book-status">
             <option value="want">Want to Read</option>
             <option value="reading">Reading</option>
             <option value="finished">Finished</option>
           </select>
 
-          <label for="book-rating">Rating (0-5)</label>
-          <input type="number" name="book-rating" placeholder="0" />
+          <label for="add-book-rating">Rating (0-5)</label>
+          <input type="number" name="add-book-rating" placeholder="0" />
 
-          <label for="book-note">Notes</label>
+          <label for="add-book-note">Notes</label>
           <textarea
-            name="book-note"
-            id="book-note"
+            name="add-book-note"
+            id="add-book-note"
             placeholder="Your thoughts about this book..."
           ></textarea>
+          <button class="add-btn">+ Add Book</button>
         </form>
       </section>
     </main>
