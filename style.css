@@ -92,14 +92,14 @@ main {
 
 /* SEARCH */
 
-form {
+.search-form {
   display: flex;
   gap: 1rem;
   width: 100%;
 }
 
 @media (max-width: 430px) {
-  form {
+  .search-form {
     flex-direction: column;
   }
 }
@@ -237,3 +237,5 @@ form {
 .book-description {
   font-size: 0.65rem;
 }
+
+/* ADD BOOK MODAL */

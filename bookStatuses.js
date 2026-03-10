@@ -2,7 +2,7 @@ export const bookStatuses = [
   {
     id: 1,
     status: "reading",
-    label: "Currently Reading",
+    label: "Reading",
   },
   {
     id: 2,

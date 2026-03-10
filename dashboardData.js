@@ -7,7 +7,7 @@ export const dashboardData = [
   {
     id: 2,
     status: "reading",
-    label: "Currently Reading",
+    label: "Reading",
   },
   {
     id: 3,
