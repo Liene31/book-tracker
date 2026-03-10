@@ -233,6 +233,12 @@ function createBookCards(books) {
         ? ratingIcon.classList.add("rating", "fa-solid", "fa-star")
         : ratingIcon.classList.add("rating", "fa-regular", "fa-star");
 
+      ratingIcon.addEventListener("click", () => {
+        const starClicked = ++r;
+        books[i].rating = starClicked;
+        createBookCards(books);
+      });
+
       bookRatingDiv.append(ratingIcon);
     }
 
