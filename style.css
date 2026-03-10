@@ -221,14 +221,17 @@ form {
   font-size: 0.7rem;
 }
 
-.book-rating button {
-  border: none;
-  background: none;
-  cursor: pointer;
+.book-rating {
+  display: flex;
+  gap: 0.2rem;
+  padding: 0.3rem 0;
 }
 
 .rating {
   color: #ffd150;
+  cursor: pointer;
+  border: none;
+  background: none;
 }
 
 .book-description {

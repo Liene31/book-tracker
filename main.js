@@ -223,22 +223,18 @@ function createBookCards(books) {
     const bookRatingDiv = document.createElement("div");
     bookRatingDiv.classList.add("book-rating");
 
-    const ratingBtn = document.createElement("button");
-
     const rating = books[i].rating;
 
     for (let r = 0; r < 5; r++) {
-      const ratingIcon = document.createElement("i");
+      const ratingIcon = document.createElement("button");
       // evaluates every position
       // r < rating -> filled star, otherwise empty star
       r < rating
         ? ratingIcon.classList.add("rating", "fa-solid", "fa-star")
         : ratingIcon.classList.add("rating", "fa-regular", "fa-star");
 
-      ratingBtn.append(ratingIcon);
+      bookRatingDiv.append(ratingIcon);
     }
-
-    bookRatingDiv.append(ratingBtn);
 
     // Description paragraph
     const bookDescriptionPara = document.createElement("p");
