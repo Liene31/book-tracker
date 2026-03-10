@@ -34,7 +34,7 @@
           <h2 class="subtitle">Track your reading journey</h2>
         </div>
       </div>
-      <button class="add-book-btn">+ Add Book</button>
+      <button id="add-book-btn" class="add-book-btn">+ Add Book</button>
     </header>
     <main>
       <!-- Dashboard Elements -->
@@ -68,12 +68,11 @@
       <section id="books" class="books"></section>
 
       <!-- Add Book Modal -->
-      <section class="modal">
-        <!-- <button class="close-book-form">❌</button> -->
-        <!-- <button
-          class="close-book-form fa-regular fa-circle-xmark fa-1x"
-        ></button> -->
-        <button class="close-book-form fa-solid fa-xmark fa-1x"></button>
+      <section id="modal" class="modal">
+        <button
+          id="close-book-form"
+          class="close-book-form fa-solid fa-xmark fa-1x"
+        ></button>
         <h2>Add New Book</h2>
         <form class="add-book-form">
           <label for="add-book-title">Title*</label>

@@ -7,6 +7,9 @@ const booksSection = document.getElementById("books");
 const searchForm = document.getElementById("search-form");
 const searchOptionSelect = document.getElementById("search-select");
 const searchFieldInput = document.getElementById("search-field");
+const addBookBtn = document.getElementById("add-book-btn");
+const closeBookInputBtn = document.getElementById("close-book-form");
+const addBookModal = document.getElementById("modal");
 
 let wantToRead;
 let reading;
@@ -262,6 +265,16 @@ function createBookCards(books) {
     booksSection.append(divEl);
   }
 }
+
+// Open Add New Book Form
+addBookBtn.addEventListener("click", () => {
+  addBookModal.style.display = "flex";
+});
+
+// Close Add New Book Form
+closeBookInputBtn.addEventListener("click", () => {
+  addBookModal.style.display = "none";
+});
 
 createDashboard();
 createFilterOptions();
