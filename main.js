@@ -292,22 +292,23 @@ closeBookInputBtn.addEventListener("click", () => {
   addBookModal.style.display = "none";
   searchForm.style.pointerEvents = "auto";
   booksSection.style.pointerEvents = "auto";
+  bookInput.reset();
 });
 
 //Get user input when submitting New Book
 bookInput.addEventListener("submit", (e) => {
   e.preventDefault();
-  const bookForm = document.forms["add-book-form"];
-  const title = capitalize(bookForm.elements.title.value);
-  const author = capitalize(bookForm.elements.author.value);
-  const statusLabel = bookForm.elements.status.selectedOptions[0].label;
-  const status = bookForm.elements.status.value;
-  const rating = bookForm.elements.rating.valueAsNumber;
-  const description = bookForm.elements.note.value;
-  const cover = bookForm.elements.cover.value;
+
+  const title = capitalize(bookInput.elements.title.value);
+  const author = capitalize(bookInput.elements.author.value);
+  const statusLabel = bookInput.elements.status.selectedOptions[0].label;
+  const status = bookInput.elements.status.value;
+  const rating = bookInput.elements.rating.valueAsNumber;
+  const description = bookInput.elements.note.value;
+  const cover = bookInput.elements.cover.value;
 
   const book = {
-    id: 5,
+    id: Math.random().toString(36).substr(2, 9),
     title: title,
     author: author,
     label: statusLabel,
@@ -319,7 +320,14 @@ bookInput.addEventListener("submit", (e) => {
       : "https://static.vecteezy.com/system/resources/thumbnails/028/646/039/small/closeup-of-books-wellorganized-on-shelves-in-the-bookstore-the-concept-of-education-photo.jpg",
   };
 
-  console.log(book);
+  bookData.push(book);
+  bookInput.reset();
+
+  createBookCards(bookData);
+  createDashboard();
+  addBookModal.style.display = "none";
+
+  console.log(bookData);
 });
 
 createDashboard();
