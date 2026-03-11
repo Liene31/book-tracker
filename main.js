@@ -267,6 +267,19 @@ function createBookCards(books) {
   }
 }
 
+function capitalize(str) {
+  const string = str.split(" ");
+  const cased = [];
+
+  string.map((word) =>
+    cased.push(word[0].toUpperCase() + word.slice(1).toLowerCase()),
+  );
+
+  return cased.join(" ");
+}
+
+// harry potter
+
 // Open -> Add New Book Form
 addBookBtn.addEventListener("click", () => {
   addBookModal.style.display = "flex";
@@ -285,17 +298,27 @@ closeBookInputBtn.addEventListener("click", () => {
 bookInput.addEventListener("submit", (e) => {
   e.preventDefault();
   const bookForm = document.forms["add-book-form"];
+  const title = capitalize(bookForm.elements.title.value);
+  const author = capitalize(bookForm.elements.author.value);
+  const statusLabel = bookForm.elements.status.selectedOptions[0].label;
+  const status = bookForm.elements.status.value;
+  const rating = bookForm.elements.rating.valueAsNumber;
+  const description = bookForm.elements.note.value;
+  const cover = bookForm.elements.cover.value;
 
   const book = {
     id: 5,
-    title: bookForm.elements.title.value,
-    author: bookForm.elements.author.value,
-    label: bookForm.elements.status.selectedOptions[0].label,
-    status: bookForm.elements.status.value,
-    rating: bookForm.elements.rating.value,
-    description: bookForm.elements.note.value,
-    coverUrl: bookForm.elements.cover.value,
+    title: title,
+    author: author,
+    label: statusLabel,
+    status: status,
+    rating: rating ? rating : 0,
+    description: description,
+    coverUrl: cover
+      ? cover
+      : "https://static.vecteezy.com/system/resources/thumbnails/028/646/039/small/closeup-of-books-wellorganized-on-shelves-in-the-bookstore-the-concept-of-education-photo.jpg",
   };
+
   console.log(book);
 });
 
