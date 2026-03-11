@@ -10,6 +10,7 @@ const searchFieldInput = document.getElementById("search-field");
 const addBookBtn = document.getElementById("add-book-btn");
 const closeBookInputBtn = document.getElementById("close-book-form");
 const addBookModal = document.getElementById("modal");
+const bookInput = document.getElementById("add-book-form");
 
 let wantToRead;
 let reading;
@@ -266,18 +267,36 @@ function createBookCards(books) {
   }
 }
 
-// Open Add New Book Form
+// Open -> Add New Book Form
 addBookBtn.addEventListener("click", () => {
   addBookModal.style.display = "flex";
   searchForm.style.pointerEvents = "none";
   booksSection.style.pointerEvents = "none";
 });
 
-// Close Add New Book Form
+// Close -> Add New Book Form
 closeBookInputBtn.addEventListener("click", () => {
   addBookModal.style.display = "none";
   searchForm.style.pointerEvents = "auto";
   booksSection.style.pointerEvents = "auto";
+});
+
+//Get user input when submitting New Book
+bookInput.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const bookForm = document.forms["add-book-form"];
+
+  const book = {
+    id: 5,
+    title: bookForm.elements.title.value,
+    author: bookForm.elements.author.value,
+    label: bookForm.elements.status.selectedOptions[0].label,
+    status: bookForm.elements.status.value,
+    rating: bookForm.elements.rating.value,
+    description: bookForm.elements.note.value,
+    coverUrl: bookForm.elements.cover.value,
+  };
+  console.log(book);
 });
 
 createDashboard();
