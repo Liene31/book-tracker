@@ -269,11 +269,15 @@ function createBookCards(books) {
 // Open Add New Book Form
 addBookBtn.addEventListener("click", () => {
   addBookModal.style.display = "flex";
+  searchForm.style.pointerEvents = "none";
+  booksSection.style.pointerEvents = "none";
 });
 
 // Close Add New Book Form
 closeBookInputBtn.addEventListener("click", () => {
   addBookModal.style.display = "none";
+  searchForm.style.pointerEvents = "auto";
+  booksSection.style.pointerEvents = "auto";
 });
 
 createDashboard();
