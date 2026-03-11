@@ -326,6 +326,8 @@ bookInput.addEventListener("submit", (e) => {
   createBookCards(bookData);
   createDashboard();
   addBookModal.style.display = "none";
+  searchForm.style.pointerEvents = "auto";
+  booksSection.style.pointerEvents = "auto";
 
   console.log(bookData);
 });
