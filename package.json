@@ -1,5 +1,27 @@
 {
   "dependencies": {
-    "nanoid": "^5.1.6"
-  }
+    "express": "^5.2.1"
+  },
+  "name": "book-tracker",
+  "version": "1.0.0",
+  "description": "book tracking app",
+  "main": "server.js",
+  "type": "module",
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  },
+  "scripts": {
+    "start": "node --env-file=.env server.js",
+    "dev": "node --watch --watch-preserve-output --env-file=.env server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Liene31/book-tracker.git"
+  },
+  "author": "Liene",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Liene31/book-tracker/issues"
+  },
+  "homepage": "https://github.com/Liene31/book-tracker#readme"
 }
