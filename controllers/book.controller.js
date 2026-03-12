@@ -14,4 +14,17 @@ export const bookController = {
 
     res.status(201).json(addedBook);
   },
+
+  updateDetails: (req, res) => {
+    const bookId = parseInt(req.params.id);
+    const modification = req.body;
+    console.log(req.params.id);
+    console.log(req.body);
+
+    // const updatedBook
+
+    res.status(200).send("book updated");
+
+    //body has only what needs to be modified but returns all object
+  },
 };

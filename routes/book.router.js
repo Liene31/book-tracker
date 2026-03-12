@@ -5,3 +5,4 @@ export const bookRouter = Router();
 
 bookRouter.get("/", bookController.getAll);
 bookRouter.post("/", bookController.insert);
+bookRouter.patch("/:id", bookController.updateDetails);
