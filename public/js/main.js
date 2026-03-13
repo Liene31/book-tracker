@@ -278,8 +278,6 @@ function capitalize(str) {
   return cased.join(" ");
 }
 
-// harry potter
-
 // Open -> Add New Book Form
 addBookBtn.addEventListener("click", () => {
   addBookModal.style.display = "flex";
@@ -328,8 +326,6 @@ bookInput.addEventListener("submit", (e) => {
   addBookModal.style.display = "none";
   searchForm.style.pointerEvents = "auto";
   booksSection.style.pointerEvents = "auto";
-
-  console.log(bookData);
 });
 
 createDashboard();

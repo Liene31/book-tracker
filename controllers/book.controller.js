@@ -18,13 +18,16 @@ export const bookController = {
   updateDetails: (req, res) => {
     const bookId = parseInt(req.params.id);
     const modification = req.body;
-    console.log(req.params.id);
-    console.log(req.body);
 
-    // const updatedBook
+    const updatedBook = fakeBookService.updateDetails(bookId, modification);
 
-    res.status(200).send("book updated");
-
-    //body has only what needs to be modified but returns all object
+    if (!updatedBook) {
+      res.status(404).json({
+        statusCode: 404,
+        message: `Book with id ${bookId} is not found`,
+      });
+    }
+    //body has only what needs to be modified but returns as response updated book not just modified fields
+    res.status(200).send(updatedBook);
   },
 };
