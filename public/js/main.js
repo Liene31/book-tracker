@@ -16,16 +16,22 @@ let wantToRead;
 let reading;
 let finished;
 
+let bookData = [];
+
 const fetchData = async () => {
   try {
     const response = await axios.get("http://localhost:3000/api/books/");
-    return response.data;
+    if (response) {
+      bookData = response.data;
+      createBookCards(bookData);
+      createDashboard();
+    } else {
+      return [];
+    }
   } catch (error) {
     console.error(error);
   }
 };
-
-const bookData = await fetchData();
 
 // Counts from bookData, status of each book in order to show it in dashboard
 function countBookStatus() {
@@ -304,7 +310,18 @@ closeBookInputBtn.addEventListener("click", () => {
   bookInput.reset();
 });
 
-//Get user input when submitting New Book
+async function addBook(book) {
+  try {
+    const response = await axios.post("http://localhost:3000/api/books/", book);
+    console.log(response);
+    console.log("new book added");
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+//Get user input
+// And post in DB
 bookInput.addEventListener("submit", (e) => {
   e.preventDefault();
 
@@ -329,16 +346,15 @@ bookInput.addEventListener("submit", (e) => {
       : "https://static.vecteezy.com/system/resources/thumbnails/028/646/039/small/closeup-of-books-wellorganized-on-shelves-in-the-bookstore-the-concept-of-education-photo.jpg",
   };
 
-  bookData.push(book);
+  addBook(book);
+  fetchData();
   bookInput.reset();
 
-  createBookCards(bookData);
   createDashboard();
   addBookModal.style.display = "none";
   searchForm.style.pointerEvents = "auto";
   booksSection.style.pointerEvents = "auto";
 });
 
-createDashboard();
+fetchData();
 createFilterOptions();
-createBookCards(bookData);

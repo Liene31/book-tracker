@@ -46,16 +46,4 @@ export const bookData = [
     coverUrl:
       "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1743617238i/222706197.jpg",
   },
-
-  {
-    id: 5,
-    title: "Test",
-    author: "Test",
-    label: "Finished",
-    status: "finished",
-    rating: 5,
-    description: "Test",
-    coverUrl:
-      "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1743617238i/222706197.jpg",
-  },
 ];
