@@ -30,4 +30,18 @@ export const bookController = {
     //body has only what needs to be modified but returns as response updated book not just modified fields
     res.status(200).send(updatedBook);
   },
+
+  delete: (req, res) => {
+    const bookId = parseInt(req.params.id);
+    const isDeleted = fakeBookService.delete(bookId);
+
+    if (isDeleted) {
+      res.sendStatus(204);
+    } else {
+      res.status(404).json({
+        statusCode: 404,
+        message: `Book with id ${bookId} is not found`,
+      });
+    }
+  },
 };

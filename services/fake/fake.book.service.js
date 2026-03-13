@@ -34,4 +34,23 @@ export const fakeBookService = {
 
     return book;
   },
+
+  delete: (id) => {
+    const book = fakeBookService.findById(id);
+
+    if (!book) {
+      return false;
+    }
+
+    //returns array of all the books except deleted book
+    const updatedBooks = bookData.filter((book) => {
+      return book.id !== id;
+    });
+
+    //Cleans my books (fakeDb) and push all the books except deleted one
+    bookData.splice(0);
+    bookData.push(...updatedBooks);
+
+    return true;
+  },
 };
