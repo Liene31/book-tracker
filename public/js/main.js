@@ -1,5 +1,5 @@
 import { dashboardData } from "./dashboardData.js";
-import { bookData } from "./bookData.js";
+// import { bookData } from "./bookData.js";
 import { bookStatuses } from "./bookStatuses.js";
 
 const dashboardSection = document.getElementById("dashboard");
@@ -15,6 +15,17 @@ const bookInput = document.getElementById("add-book-form");
 let wantToRead;
 let reading;
 let finished;
+
+const fetchData = async () => {
+  try {
+    const response = await axios.get("http://localhost:3000/api/books/");
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const bookData = await fetchData();
 
 // Counts from bookData, status of each book in order to show it in dashboard
 function countBookStatus() {
