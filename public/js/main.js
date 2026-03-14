@@ -1,5 +1,4 @@
 import { dashboardData } from "./dashboardData.js";
-// import { bookData } from "./bookData.js";
 import { bookStatuses } from "./bookStatuses.js";
 
 const dashboardSection = document.getElementById("dashboard");
@@ -131,21 +130,31 @@ function createStatusSelect(selectedStatus, bookId) {
   return statusSelect;
 }
 
+async function updateBook(id, modification) {
+  try {
+    const response = await axios.patch(
+      `http://localhost:3000/api/books/${id}`,
+      modification,
+    );
+    console.log(response);
+    await fetchData();
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
 // Update bookData with a new status when user changes it in book info card
 function updateBookStatus(statusSelect) {
   // event.change detects the change in the status
-  statusSelect.addEventListener("change", (event) => {
+  statusSelect.addEventListener("change", async (event) => {
     const newBookStatus = event.target.value;
     const selectId = event.target.id;
 
-    // identify which book's select status was changed and updates with new value
-    for (let i = 0; i < bookData.length; i++) {
-      if (bookData[i].id === parseInt(selectId)) {
-        bookData[i].status = newBookStatus;
-      }
-    }
-    //if the change in status has happened, update the dashboard with new count
-    createDashboard();
+    const newStatus = {
+      status: newBookStatus,
+    };
+
+    await updateBook(selectId, newStatus);
   });
 }
 
@@ -310,34 +319,31 @@ closeBookInputBtn.addEventListener("click", () => {
   bookInput.reset();
 });
 
+//POST book to backend
 async function addBook(book) {
   try {
     const response = await axios.post("http://localhost:3000/api/books/", book);
-    console.log(response);
-    console.log("new book added");
   } catch (error) {
     console.error(error.message);
   }
 }
 
 //Get user input
-// And post in DB
-bookInput.addEventListener("submit", (e) => {
+
+bookInput.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const title = capitalize(bookInput.elements.title.value);
   const author = capitalize(bookInput.elements.author.value);
-  const statusLabel = bookInput.elements.status.selectedOptions[0].label;
   const status = bookInput.elements.status.value;
   const rating = bookInput.elements.rating.valueAsNumber;
   const description = bookInput.elements.note.value;
   const cover = bookInput.elements.cover.value;
 
   const book = {
-    id: Math.random().toString(36).substr(2, 9),
+    id: Math.floor(Math.random() * 100),
     title: title,
     author: author,
-    label: statusLabel,
     status: status,
     rating: rating ? rating : 0,
     description: description,
@@ -346,11 +352,10 @@ bookInput.addEventListener("submit", (e) => {
       : "https://static.vecteezy.com/system/resources/thumbnails/028/646/039/small/closeup-of-books-wellorganized-on-shelves-in-the-bookstore-the-concept-of-education-photo.jpg",
   };
 
-  addBook(book);
-  fetchData();
-  bookInput.reset();
+  await addBook(book);
+  await fetchData();
 
-  createDashboard();
+  bookInput.reset();
   addBookModal.style.display = "none";
   searchForm.style.pointerEvents = "auto";
   booksSection.style.pointerEvents = "auto";
