@@ -14,6 +14,7 @@ const bookInput = document.getElementById("add-book-form");
 let wantToRead;
 let reading;
 let finished;
+let filterSelection;
 
 let bookData = [];
 
@@ -136,7 +137,7 @@ async function updateBook(id, modification) {
       `http://localhost:3000/api/books/${id}`,
       modification,
     );
-    console.log(response);
+
     await fetchData();
   } catch (error) {
     console.error(error.message);
@@ -160,61 +161,53 @@ function updateBookStatus(statusSelect) {
 
 // Search
 
-let filterSelection;
+searchOptionSelect.addEventListener("change", (event) => {
+  filterSelection = event.target.value;
 
-function handleSearchSelect() {
-  searchOptionSelect.addEventListener("change", (event) => {
-    filterSelection = event.target.value;
+  if (filterSelection === "all") {
+    return createBookCards(bookData);
+  }
 
-    if (filterSelection === "all") {
-      return createBookCards(bookData);
+  const filteredBooks = bookData.filter((books) => {
+    return books.status === filterSelection;
+  });
+
+  createBookCards(filteredBooks);
+});
+
+//prevent the browser from reloading the page
+searchForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+});
+
+//detect every change while the user types
+searchFieldInput.addEventListener("input", () => {
+  const inputValue = searchFieldInput.value.toLowerCase();
+
+  //return the books which match the search and status
+  const searchResults = bookData.filter((book) => {
+    if (filterSelection === undefined || filterSelection === "all") {
+      return (
+        book.title.toLowerCase().includes(inputValue) ||
+        book.author.toLowerCase().includes(inputValue)
+      );
+    } else if (filterSelection === book.status) {
+      return (
+        book.title.toLowerCase().includes(inputValue) ||
+        book.author.toLowerCase().includes(inputValue)
+      );
     }
-
-    const filteredBooks = bookData.filter((books) => {
-      return books.status === filterSelection;
-    });
-
-    createBookCards(filteredBooks);
-  });
-}
-
-handleSearchSelect();
-
-function handleSearchInput() {
-  //prevent the browser from reloading the page
-  searchForm.addEventListener("submit", (e) => {
-    e.preventDefault();
   });
 
-  //detect every change while the user types
-  searchFieldInput.addEventListener("input", () => {
-    const inputValue = searchFieldInput.value.toLowerCase();
-
-    //return the books which match the search and status
-    const searchResults = bookData.filter((book) => {
-      if (filterSelection === undefined || filterSelection === "all") {
-        return (
-          book.title.toLowerCase().includes(inputValue) ||
-          book.author.toLowerCase().includes(inputValue)
-        );
-      } else if (filterSelection === book.status) {
-        return (
-          book.title.toLowerCase().includes(inputValue) ||
-          book.author.toLowerCase().includes(inputValue)
-        );
-      }
-    });
-
-    createBookCards(searchResults);
-  });
-}
-
-handleSearchInput();
+  createBookCards(searchResults);
+});
 
 // Create Book cards elements in HTML
 function createBookCards(books) {
   booksSection.innerHTML = "";
+
   for (let i = 0; i < books.length; i++) {
+    const bookId = books[i].id;
     // Book wrapper
     const divEl = document.createElement("div");
     divEl.classList.add("book-wrapper");
@@ -225,6 +218,11 @@ function createBookCards(books) {
     deleteBtn.classList.add("delete-book");
     deleteIcon.classList.add("delete-icon", "fa-solid", "fa-trash-can");
     deleteBtn.append(deleteIcon);
+
+    deleteBtn.addEventListener("click", async () => {
+      await deleteBook(bookId);
+      await fetchData();
+    });
 
     // Book Cover
     const imgDiv = document.createElement("div");
@@ -245,7 +243,7 @@ function createBookCards(books) {
 
     // Book Status select
     const selectedBookStatus = books[i].status;
-    const bookId = books[i].id;
+
     //Gets from the function Select element to append later to the bookInfoDiv
     const statusSelect = createStatusSelect(selectedBookStatus, bookId);
 
@@ -264,11 +262,12 @@ function createBookCards(books) {
         : ratingIcon.classList.add("rating", "fa-regular", "fa-star");
 
       // detects which star's index was clicked and adds + 1 to transform in rating
-      // update booksData with new rating and render the card with updates
-      ratingIcon.addEventListener("click", () => {
+      ratingIcon.addEventListener("click", async () => {
         const starClicked = r + 1;
-        books[i].rating = starClicked;
-        createBookCards(books);
+        const newRating = {
+          rating: starClicked,
+        };
+        await updateBook(bookId, newRating);
       });
 
       bookRatingDiv.append(ratingIcon);
@@ -360,6 +359,16 @@ bookInput.addEventListener("submit", async (e) => {
   searchForm.style.pointerEvents = "auto";
   booksSection.style.pointerEvents = "auto";
 });
+
+async function deleteBook(id) {
+  try {
+    const response = await axios.delete(
+      `http://localhost:3000/api/books/${id}`,
+    );
+  } catch (error) {
+    console.error(error.message);
+  }
+}
 
 fetchData();
 createFilterOptions();
