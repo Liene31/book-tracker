@@ -20,9 +20,7 @@ let bookData = [];
 
 const fetchData = async () => {
   try {
-    const response = await axios.get(
-      "https://book-tracker-kappa-liard.vercel.app/api/books",
-    );
+    const response = await axios.get("/api/books");
     if (response) {
       bookData = response.data;
 
@@ -136,10 +134,7 @@ function createStatusSelect(selectedStatus, bookId) {
 
 async function updateBook(id, modification) {
   try {
-    const response = await axios.patch(
-      `https://book-tracker-kappa-liard.vercel.app/api/books/${id}`,
-      modification,
-    );
+    const response = await axios.patch(`/api/books/${id}`, modification);
 
     await fetchData();
   } catch (error) {
@@ -324,10 +319,7 @@ closeBookInputBtn.addEventListener("click", () => {
 //POST book to backend
 async function addBook(book) {
   try {
-    const response = await axios.post(
-      "https://book-tracker-kappa-liard.vercel.app/api/books/",
-      book,
-    );
+    const response = await axios.post("/api/books", book);
   } catch (error) {
     console.error(error.message);
   }
@@ -367,9 +359,7 @@ bookInput.addEventListener("submit", async (e) => {
 
 async function deleteBook(id) {
   try {
-    const response = await axios.delete(
-      `https://book-tracker-kappa-liard.vercel.app/api/books/${id}`,
-    );
+    const response = await axios.delete(`/api/books/${id}`);
   } catch (error) {
     console.error(error.message);
   }
