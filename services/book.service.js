@@ -15,7 +15,7 @@ export const bookService = {
     try {
       const bookToAdd = Book(book);
       await bookToAdd.save();
-      console.log(bookToAdd);
+
       return bookToAdd;
     } catch (error) {
       console.log(error);
@@ -41,6 +41,7 @@ export const bookService = {
   delete: async (id) => {
     try {
       const book = await Book.findByIdAndDelete(id);
+
       if (book) {
         return true;
       } else {

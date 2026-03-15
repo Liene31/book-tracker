@@ -23,6 +23,7 @@ const fetchData = async () => {
     const response = await axios.get("http://localhost:3000/api/books/");
     if (response) {
       bookData = response.data;
+
       createBookCards(bookData);
       createDashboard();
     } else {
@@ -207,7 +208,7 @@ function createBookCards(books) {
   booksSection.innerHTML = "";
 
   for (let i = 0; i < books.length; i++) {
-    const bookId = books[i].id;
+    const bookId = books[i]._id;
     // Book wrapper
     const divEl = document.createElement("div");
     divEl.classList.add("book-wrapper");
@@ -224,7 +225,6 @@ function createBookCards(books) {
       await fetchData();
     });
 
-    console.log(bookId);
     // Book Cover
     const imgDiv = document.createElement("div");
     imgDiv.classList.add("book-image");

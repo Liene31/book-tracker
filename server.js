@@ -21,13 +21,11 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(async (req, res, next) => {
   try {
     await mongoose.connect(DB_CONNECTION, { dbName: "BookTracker" });
-    console.log("Successfully connected to the DB");
+
     next();
   } catch (error) {
     console.log(`Connection failed with error ${error}`);
-    res
-      .status(500)
-      .json({ statusCode: 500, message: "Impossible to connect to DB" });
+    res.status(500).json({ statusCode: 500, message: `${error.message}` });
   }
 });
 
