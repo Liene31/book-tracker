@@ -1,47 +1,68 @@
 import { fakeBookService } from "../services/fake/fake.book.service.js";
+import { bookService } from "../services/book.service.js";
 
 export const bookController = {
-  getAll: (req, res) => {
-    const books = fakeBookService.find();
-
-    res.status(200).json(books);
+  getAll: async (req, res) => {
+    try {
+      const books = await bookService.find();
+      res.status(200).json(books);
+    } catch (error) {
+      console.log(err);
+      res.status(500).json({ statusCode: 500, message: "DB error" });
+    }
   },
 
-  insert: (req, res) => {
+  insert: async (req, res) => {
     const bookToAdd = req.body;
 
-    const addedBook = fakeBookService.create(bookToAdd);
-
-    res.status(201).json(addedBook);
+    try {
+      const addedBook = await bookService.create(bookToAdd);
+      res.status(201).json(addedBook);
+    } catch (error) {
+      console.log(err);
+      res.status(500).json({ statusCode: 500, message: "DB error" });
+    }
   },
 
-  updateDetails: (req, res) => {
-    const bookId = parseInt(req.params.id);
+  updateDetails: async (req, res) => {
+    const bookId = req.params.id;
     const modification = req.body;
 
-    const updatedBook = fakeBookService.updateDetails(bookId, modification);
+    try {
+      const updatedBook = await bookService.updateDetails(bookId, modification);
 
-    if (!updatedBook) {
-      res.status(404).json({
-        statusCode: 404,
-        message: `Book with id ${bookId} is not found`,
-      });
+      if (!updatedBook) {
+        res.status(404).json({
+          statusCode: 404,
+          message: `Book with id ${bookId} is not found`,
+        });
+      } else {
+        //body has only what needs to be modified but returns as response updated book not just modified fields
+        res.status(200).send(updatedBook);
+      }
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ statusCode: 500, message: "DB error" });
     }
-    //body has only what needs to be modified but returns as response updated book not just modified fields
-    res.status(200).send(updatedBook);
   },
 
-  delete: (req, res) => {
-    const bookId = parseInt(req.params.id);
-    const isDeleted = fakeBookService.delete(bookId);
+  delete: async (req, res) => {
+    const bookId = req.params.id;
 
-    if (isDeleted) {
-      res.sendStatus(204);
-    } else {
-      res.status(404).json({
-        statusCode: 404,
-        message: `Book with id ${bookId} is not found`,
-      });
+    try {
+      const isDeleted = await bookService.delete(bookId);
+
+      if (isDeleted) {
+        res.sendStatus(204);
+      } else {
+        res.status(404).json({
+          statusCode: 404,
+          message: `Book with id ${bookId} is not found`,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ statusCode: 500, message: "DB error" });
     }
   },
 };

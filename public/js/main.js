@@ -224,6 +224,7 @@ function createBookCards(books) {
       await fetchData();
     });
 
+    console.log(bookId);
     // Book Cover
     const imgDiv = document.createElement("div");
     imgDiv.classList.add("book-image");
@@ -340,7 +341,6 @@ bookInput.addEventListener("submit", async (e) => {
   const cover = bookInput.elements.cover.value;
 
   const book = {
-    id: Math.floor(Math.random() * 100),
     title: title,
     author: author,
     status: status,
