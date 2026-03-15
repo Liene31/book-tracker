@@ -2,7 +2,6 @@ import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 import { router } from "./routes/index.js";
-import { connect } from "http2";
 import mongoose from "mongoose";
 
 const __filename = fileURLToPath(import.meta.url);
