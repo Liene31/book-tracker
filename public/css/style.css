@@ -47,10 +47,6 @@ body {
   padding-top: 0.3rem;
 }
 
-.login-view {
-  display: none;
-}
-
 .auth .auth-form {
   display: flex;
   flex-direction: column;
@@ -99,13 +95,21 @@ body {
   display: flex;
 }
 
+.login-view {
+  display: flex;
+}
+
 /* MAIN APP */
 
 .app {
-  display: none;
+  display: flex;
   flex-direction: column;
   gap: 1.5rem;
   align-items: center;
+}
+
+.hidden {
+  display: none;
 }
 
 /* HEADER */

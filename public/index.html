@@ -39,7 +39,7 @@
       </header>
 
       <!-- LOGIN -->
-      <div class="auth-container login-view">
+      <div id="login-view" class="auth-container login-view">
         <div class="welcome-message">
           <h3>Welcome Back</h3>
           <p>Log in to access your book collection</p>
@@ -47,33 +47,39 @@
 
         <form id="login-form" class="auth-form">
           <div class="auth-details">
-            <label for="email">Email</label>
+            <label for="login-email">Email</label>
             <input
+              id="login-email"
               type="email"
-              name="email"
+              name="login-email"
               placeholder="youremail@example.com"
               required
             />
           </div>
           <div class="auth-details">
-            <label for="password">Password</label>
+            <label for="login-password">Password</label>
 
             <input
+              id="login-password"
               type="password"
-              name="password"
+              name="login-password"
               placeholder="**********"
               required
             />
           </div>
           <button class="cta-btn">Log in</button>
-          <button class="cta-btn" type="button">Try Demo Account</button>
+          <button id="demo-btn" class="cta-btn" type="button">
+            Try Demo Account
+          </button>
         </form>
 
-        <a href="#" class="cta-link">Don't have an account? Sign up</a>
+        <button id="show-signup" class="cta-link">
+          Don't have an account? Sign up
+        </button>
       </div>
 
       <!-- SIGN UP -->
-      <div class="auth-container signup-view">
+      <div id="signup-view" class="auth-container signup-view hidden">
         <div class="welcome-message">
           <h3>Create Account</h3>
           <p>Sign up to start tracking your books</p>
@@ -81,27 +87,30 @@
 
         <form id="signup-form" class="auth-form">
           <div class="auth-details">
-            <label for="fullName">Full Name</label>
+            <label for="full-name">Full Name</label>
             <input
+              id="full-name"
               type="text"
-              name="fullName"
+              name="full-name"
               placeholder="John Doe"
               required
             />
-            <label for="email">Email</label>
+            <label for="signup-email">Email</label>
             <input
+              id="signup-email"
               type="email"
-              name="email"
+              name="signup-email"
               placeholder="johndoe@example.com"
               required
             />
           </div>
           <div class="auth-details">
-            <label for="password">Password</label>
+            <label for="signup-password">Password</label>
 
             <input
+              id="signup-password"
               type="password"
-              name="password"
+              name="signup-password"
               placeholder="**********"
               required
             />
@@ -109,7 +118,9 @@
           <button class="cta-btn">Sign Up</button>
         </form>
 
-        <button class="cta-link">Already have an account? Log in</button>
+        <button id="show-login" class="cta-link">
+          Already have an account? Log in
+        </button>
       </div>
     </section>
 

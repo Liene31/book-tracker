@@ -10,6 +10,13 @@ const addBookBtn = document.getElementById("add-book-btn");
 const closeBookInputBtn = document.getElementById("close-book-form");
 const addBookModal = document.getElementById("modal");
 const bookInput = document.getElementById("add-book-form");
+const showSignupBtn = document.getElementById("show-signup");
+const showLoginBtn = document.getElementById("show-login");
+const signupViewDiv = document.getElementById("signup-view");
+const loginViewDiv = document.getElementById("login-view");
+const demoBtn = document.getElementById("demo-btn");
+const appViewDiv = document.getElementById("app");
+const authSection = document.getElementById("auth");
 
 let wantToRead;
 let reading;
@@ -368,6 +375,28 @@ async function deleteBook(id) {
     console.error(error.message);
   }
 }
+
+// AUTHENTICATION
+
+//Opens Sign-up view
+showSignupBtn.addEventListener("click", () => {
+  loginViewDiv.classList.add("hidden");
+  signupViewDiv.classList.remove("hidden");
+});
+
+//Opens Login view
+showLoginBtn.addEventListener("click", () => {
+  loginViewDiv.classList.remove("hidden");
+  signupViewDiv.classList.add("hidden");
+});
+
+//Opens App view with predefined login details
+demoBtn.addEventListener("click", () => {
+  loginViewDiv.classList.add("hidden");
+  appViewDiv.classList.remove("hidden");
+  authSection.classList.add("hidden");
+  console.log("clicked");
+});
 
 fetchData();
 createFilterOptions();
