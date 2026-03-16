@@ -31,7 +31,7 @@ body {
 }
 
 .auth .auth-container {
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   gap: 1.5rem;
   width: 95%;
@@ -47,21 +47,25 @@ body {
   padding-top: 0.3rem;
 }
 
-.auth .login-form {
+.login-view {
+  display: none;
+}
+
+.auth .auth-form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.login-form input,
-button {
+.auth-form input,
+.cta-btn {
   padding: 0.6rem;
   border-radius: 0.5rem;
   border: 0.5px solid #222222;
   font-size: 0.8rem;
 }
 
-.login-form button {
+.auth-form .cta-btn {
   background-color: #975c6b;
   border: none;
   font-family: inherit;
@@ -70,19 +74,29 @@ button {
   cursor: pointer;
 }
 
-.login-form .login-details {
+.auth-form .auth-details {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
 }
 
-.login-form .login-details label {
+.auth-form .auth-details label {
   font-size: 0.7rem;
   font-weight: 700;
 }
 
-.auth .sign-up-cta {
+.auth .cta-link {
+  font-family: inherit;
   font-size: 0.8rem;
+  font-weight: 500;
+  color: #975c6b;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.signup-view {
+  display: flex;
 }
 
 /* MAIN APP */
