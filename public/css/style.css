@@ -33,18 +33,56 @@ body {
 .auth .auth-container {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1.5rem;
   width: 95%;
-  max-width: 400px;
+  max-width: 350px;
   padding: 2rem;
   border-radius: 1rem;
   background-color: #faf8ff;
   color: #222222;
 }
 
+.welcome-message p {
+  font-size: 0.7rem;
+  padding-top: 0.3rem;
+}
+
 .auth .login-form {
   display: flex;
   flex-direction: column;
+  gap: 1rem;
+}
+
+.login-form input,
+button {
+  padding: 0.6rem;
+  border-radius: 0.5rem;
+  border: 0.5px solid #222222;
+  font-size: 0.8rem;
+}
+
+.login-form button {
+  background-color: #975c6b;
+  border: none;
+  font-family: inherit;
+  font-weight: 700;
+  color: #222222;
+  cursor: pointer;
+}
+
+.login-form .login-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.login-form .login-details label {
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.auth .sign-up-cta {
+  font-size: 0.8rem;
 }
 
 /* MAIN APP */
