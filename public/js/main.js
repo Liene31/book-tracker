@@ -223,9 +223,13 @@ function createBookCards(books) {
     });
 
     // Book Cover
+    const coverUrl =
+      books[i].coverUrl ||
+      "https://static.vecteezy.com/system/resources/thumbnails/028/646/039/small/closeup-of-books-wellorganized-on-shelves-in-the-bookstore-the-concept-of-education-photo.jpg";
+
     const imgDiv = document.createElement("div");
     imgDiv.classList.add("book-image");
-    imgDiv.style.backgroundImage = `url(${books[i].coverUrl})`;
+    imgDiv.style.backgroundImage = `url("${coverUrl}")`;
 
     // Book Info
     const bookInfoDiv = document.createElement("div");
