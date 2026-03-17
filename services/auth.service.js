@@ -1,3 +1,4 @@
+import argon2 from "argon2";
 import { User } from "../models/user.model.js";
 
 export const authService = {
@@ -8,7 +9,16 @@ export const authService = {
         return false;
       }
 
-      return userFound;
+      const passwordCorrect = await argon2.verify(
+        userFound.password,
+        credentials.password,
+      );
+
+      if (!passwordCorrect) {
+        return false;
+      } else {
+        return userFound;
+      }
     } catch (error) {
       console.log(error);
       throw new Error(error);
@@ -46,6 +56,8 @@ export const authService = {
 
   create: async (user) => {
     try {
+      const hashedPassword = await argon2.hash(user.password);
+      user.password = hashedPassword;
       const userToCreate = User(user);
       await userToCreate.save();
       return userToCreate;
