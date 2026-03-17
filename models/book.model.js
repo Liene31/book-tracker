@@ -29,6 +29,12 @@ const bookSchema = new Schema(
     coverUrl: {
       type: String,
     },
+
+    // user: {
+    //   type: Types.ObjectId,
+    //   ref: "User",
+    //   required: true,
+    // },
   },
   {
     collection: "Book",
