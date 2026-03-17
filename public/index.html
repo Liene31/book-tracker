@@ -67,7 +67,9 @@
               required
             />
           </div>
-          <button class="cta-btn">Log in</button>
+          <button class="cta-btn">
+            <i class="fa-solid fa-arrow-right-to-bracket"></i> Log in
+          </button>
           <button id="demo-btn" class="cta-btn" type="button">
             Try Demo Account
           </button>
@@ -115,7 +117,9 @@
               required
             />
           </div>
-          <button class="cta-btn">Sign Up</button>
+          <button class="cta-btn">
+            <i class="fa-solid fa-user-plus"></i> Sign Up
+          </button>
         </form>
 
         <button id="show-login" class="cta-link">
@@ -135,8 +139,17 @@
             <h2 class="subtitle">Track your reading journey</h2>
           </div>
         </div>
-        <button id="add-book-btn" class="add-book-btn">+ Add Book</button>
+        <div class="login-menu">
+          <div class="login-info">
+            <span class="login-status">Logged in as</span>
+            <span class="login-email">demo@booktracker.com</span>
+          </div>
+          <button id="log-out-btn" class="app-btn">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>Log Out
+          </button>
+        </div>
       </header>
+      <button id="add-book-btn" class="app-btn">+ Add Book</button>
       <main>
         <!-- Dashboard Elements -->
         <section id="dashboard" class="dashboard"></section>

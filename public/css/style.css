@@ -139,8 +139,8 @@ header .subtitle {
   font-size: 0.7rem;
 }
 
-header .add-book-btn {
-  align-self: center;
+.app .app-btn {
+  align-self: flex-start;
   background-color: #975c6b;
   border: none;
   border-radius: 0.5rem;
@@ -149,6 +149,21 @@ header .add-book-btn {
   color: #222222;
   padding: 0.7rem 1rem;
   cursor: pointer;
+}
+
+.app .login-menu {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.app .login-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 0.7rem;
+  font-weight: 900;
+  font-style: italic;
 }
 
 main {
