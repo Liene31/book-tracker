@@ -17,6 +17,9 @@ const loginViewDiv = document.getElementById("login-view");
 const demoBtn = document.getElementById("demo-btn");
 const appViewDiv = document.getElementById("app");
 const authSection = document.getElementById("auth");
+const loginForm = document.getElementById("login-form");
+const signupForm = document.getElementById("signup-form");
+const logOutBtn = document.getElementById("log-out-btn");
 
 let wantToRead;
 let reading;
@@ -336,8 +339,7 @@ async function addBook(book) {
   }
 }
 
-//Get user input
-
+//Get book details from user input
 bookInput.addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -395,7 +397,54 @@ demoBtn.addEventListener("click", () => {
   loginViewDiv.classList.add("hidden");
   appViewDiv.classList.remove("hidden");
   authSection.classList.add("hidden");
-  console.log("clicked");
+});
+
+//Get user details from Log-in form
+loginForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const loginEmail = loginForm.elements["login-email"].value;
+  const loginPassword = loginForm.elements["login-password"].value;
+
+  const loginDetails = {
+    loginEmail,
+    loginPassword,
+  };
+
+  loginForm.reset();
+
+  //If all the user verification went well open app view
+  loginViewDiv.classList.add("hidden");
+  appViewDiv.classList.remove("hidden");
+  authSection.classList.add("hidden");
+});
+
+//Get user details from Sign-up form
+signupForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const userName = signupForm.elements["user-name"].value;
+  const signupEmail = signupForm.elements["signup-email"].value;
+  const signupPassword = signupForm.elements["signup-password"].value;
+
+  const signupDetails = {
+    userName,
+    signupEmail,
+    signupPassword,
+  };
+
+  signupForm.reset();
+
+  //If all the user verification went well open app view
+  signupViewDiv.classList.add("hidden");
+  appViewDiv.classList.remove("hidden");
+  authSection.classList.add("hidden");
+});
+
+// Log-out Btn, returns to Log in page
+logOutBtn.addEventListener("click", () => {
+  appViewDiv.classList.add("hidden");
+  authSection.classList.remove("hidden");
+  loginViewDiv.classList.remove("hidden");
 });
 
 fetchData();
