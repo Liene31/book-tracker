@@ -2,9 +2,12 @@ import { fakeBookService } from "../services/fake/fake.book.service.js";
 import { bookService } from "../services/book.service.js";
 
 export const bookController = {
+  //get all books for the specific user
   getAll: async (req, res) => {
+    //gets this info from auth.middleware which is between router & controller
+    const userId = req.user.id;
     try {
-      const books = await bookService.find();
+      const books = await bookService.find(userId);
       res.status(200).json(books);
     } catch (error) {
       console.log(err);
@@ -50,9 +53,11 @@ export const bookController = {
 
   delete: async (req, res) => {
     const bookId = req.params.id;
+    //gets this info from auth.middleware which is between router & controller
+    const userId = req.user.id;
 
     try {
-      const isDeleted = await bookService.delete(bookId);
+      const isDeleted = await bookService.delete(bookId, userId);
 
       if (isDeleted) {
         res.sendStatus(204);

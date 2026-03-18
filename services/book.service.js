@@ -1,9 +1,10 @@
 import { Book } from "../models/book.model.js";
 
 export const bookService = {
-  find: async () => {
+  //find all books for the specific user
+  find: async (userId) => {
     try {
-      const books = await Book.find();
+      const books = await Book.find({ user: userId });
       return books;
     } catch (error) {
       console.log(error);
@@ -40,11 +41,16 @@ export const bookService = {
     }
   },
 
-  delete: async (id) => {
+  delete: async (bookId, userId) => {
     try {
-      const book = await Book.findByIdAndDelete(id);
+      // checking if specific user has book with req ID;
+      //response returns deletedCount: 0 if match not found, deletedCount: 1 -> if success
+      const response = await Book.deleteOne({
+        _id: bookId,
+        user: userId,
+      });
 
-      if (book) {
+      if (response.deletedCount === 1) {
         return true;
       } else {
         return false;
