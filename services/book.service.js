@@ -26,15 +26,22 @@ export const bookService = {
     }
   },
 
-  updateDetails: async (id, modification) => {
+  updateDetails: async (bookId, userId, modification) => {
     try {
-      //Finds a matching book, updates it according to the update arg and returns the found book (if any).
-      //returnDocument: "after" -> says to return new book object, otherwise it returns not-modified book object
-      const book = await Book.findByIdAndUpdate(id, modification, {
-        returnDocument: "after",
-      });
+      // Instead of findByIdAndUpdate, using updateOne(filter, update, options)
+      // updateOne returns meta data not modified book
+      // in my case it's okay since I am fetching all books in frontend, instead of using response data
+      // later on it could be improved
+      const response = await Book.updateOne(
+        { _id: bookId, user: userId },
+        modification,
+      );
 
-      return book;
+      if (response.modifiedCount === 1) {
+        return true;
+      } else {
+        return false;
+      }
     } catch (error) {
       console.log(error);
       throw new Error(error);

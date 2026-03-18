@@ -32,18 +32,25 @@ export const bookController = {
   updateDetails: async (req, res) => {
     const bookId = req.params.id;
     const modification = req.body;
+    //gets this info from auth.middleware which is between router & controller
+    const userId = req.user.id;
 
     try {
-      const updatedBook = await bookService.updateDetails(bookId, modification);
-
-      if (!updatedBook) {
+      const isUpdated = await bookService.updateDetails(
+        bookId,
+        userId,
+        modification,
+      );
+      // I am not retuning the updated book object because using updateOne()
+      // Currently in frontend I don't do anything with response object rather fetch all books to update UI
+      // Later on that can be improved with using response data and not to re-fetching in frontend
+      if (isUpdated) {
+        res.sendStatus(204);
+      } else {
         res.status(404).json({
           statusCode: 404,
           message: `Book with id ${bookId} is not found`,
         });
-      } else {
-        //body has only what needs to be modified but returns as response updated book not just modified fields
-        res.status(200).send(updatedBook);
       }
     } catch (error) {
       console.log(error);
