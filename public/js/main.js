@@ -380,6 +380,26 @@ async function deleteBook(id) {
 
 // AUTHENTICATION
 
+//Add new user to DB
+async function addUser(user) {
+  try {
+    const response = await axios.post("/api/auth/register", user);
+
+    console.log(
+      `${response.data.userName} has been added, please log in to continue  `,
+    );
+  } catch (error) {
+    if (error.response) {
+      console.log(error.response.data.message);
+    } else if (error.request) {
+      //server/network issue
+      console.log("server unavailable, try again later");
+    } else {
+      console.log("unexpected error");
+    }
+  }
+}
+
 //Opens Sign-up view
 showSignupBtn.addEventListener("click", () => {
   loginViewDiv.classList.add("hidden");
@@ -419,7 +439,7 @@ loginForm.addEventListener("submit", (e) => {
 });
 
 //Get user details from Sign-up form
-signupForm.addEventListener("submit", (e) => {
+signupForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const userName = signupForm.elements["user-name"].value;
@@ -427,17 +447,22 @@ signupForm.addEventListener("submit", (e) => {
   const signupPassword = signupForm.elements["signup-password"].value;
 
   const signupDetails = {
-    userName,
-    signupEmail,
-    signupPassword,
+    userName: userName,
+    email: signupEmail,
+    password: signupPassword,
   };
+
+  await addUser(signupDetails);
 
   signupForm.reset();
 
+  // I should rather inform user that registration was successful, please login
+  // and direct to login page
+
   //If all the user verification went well open app view
-  signupViewDiv.classList.add("hidden");
-  appViewDiv.classList.remove("hidden");
-  authSection.classList.add("hidden");
+  // signupViewDiv.classList.add("hidden");
+  // appViewDiv.classList.remove("hidden");
+  // authSection.classList.add("hidden");
 });
 
 // Log-out Btn, returns to Log in page
