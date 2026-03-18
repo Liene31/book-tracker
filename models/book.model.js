@@ -30,11 +30,11 @@ const bookSchema = new Schema(
       type: String,
     },
 
-    // user: {
-    //   type: Types.ObjectId,
-    //   ref: "User",
-    //   required: true,
-    // },
+    user: {
+      type: Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
   },
   {
     collection: "Book",
