@@ -11,8 +11,10 @@ export const bookService = {
     }
   },
 
-  create: async (book) => {
+  create: async (book, userId) => {
     try {
+      // first add the userId to book's data
+      book.user = userId;
       const bookToAdd = Book(book);
       await bookToAdd.save();
 

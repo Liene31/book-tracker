@@ -14,12 +14,14 @@ export const bookController = {
 
   insert: async (req, res) => {
     const bookToAdd = req.body;
+    //gets this info from auth.middleware which is between router & controller
+    const userId = req.user.id;
 
     try {
-      const addedBook = await bookService.create(bookToAdd);
+      const addedBook = await bookService.create(bookToAdd, userId);
       res.status(201).json(addedBook);
     } catch (error) {
-      console.log(err);
+      console.log(error);
       res.status(500).json({ statusCode: 500, message: "DB error" });
     }
   },
