@@ -28,6 +28,22 @@ let filterSelection;
 
 let bookData = [];
 
+// if the token exists, opens the app view and fetch the data of that user
+// if token is not saved, opens the login view
+document.addEventListener("DOMContentLoaded", () => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    appViewDiv.classList.remove("hidden");
+    authSection.classList.add("hidden");
+    loginViewDiv.classList.add("hidden");
+    fetchData();
+  } else {
+    appViewDiv.classList.add("hidden");
+    authSection.classList.remove("hidden");
+    loginViewDiv.classList.remove("hidden");
+  }
+});
+
 const fetchData = async () => {
   const token = localStorage.getItem("token");
 
