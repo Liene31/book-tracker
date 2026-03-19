@@ -464,10 +464,13 @@ showLoginBtn.addEventListener("click", () => {
 });
 
 //Opens App view with predefined login details
-demoBtn.addEventListener("click", () => {
-  loginViewDiv.classList.add("hidden");
-  appViewDiv.classList.remove("hidden");
-  authSection.classList.add("hidden");
+demoBtn.addEventListener("click", async () => {
+  const loginDetails = {
+    email: "demo@booktracker.com",
+    password: "demo1234",
+  };
+
+  await login(loginDetails);
 });
 
 //Get user details from Log-in form
@@ -518,6 +521,8 @@ logOutBtn.addEventListener("click", () => {
   appViewDiv.classList.add("hidden");
   authSection.classList.remove("hidden");
   loginViewDiv.classList.remove("hidden");
+  // After signing out, remove token
+  localStorage.removeItem("token");
 });
 
 createFilterOptions();
