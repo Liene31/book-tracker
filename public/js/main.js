@@ -20,6 +20,9 @@ const authSection = document.getElementById("auth");
 const loginForm = document.getElementById("login-form");
 const signupForm = document.getElementById("signup-form");
 const logOutBtn = document.getElementById("log-out-btn");
+const errorMessageLoginPara = document.getElementById("error-message-login");
+const errorMessageSignUpPara = document.getElementById("error-message-signup");
+const loginWelcomeUserSpan = document.getElementById("login-welcome-user");
 
 let wantToRead;
 let reading;
@@ -32,7 +35,9 @@ let bookData = [];
 // if token is not saved, opens the login view
 document.addEventListener("DOMContentLoaded", () => {
   const token = localStorage.getItem("token");
+  const userEmail = localStorage.getItem("email");
   if (token) {
+    loginWelcomeUserSpan.textContent = userEmail;
     appViewDiv.classList.remove("hidden");
     authSection.classList.add("hidden");
     loginViewDiv.classList.add("hidden");
@@ -428,12 +433,14 @@ async function addUser(user) {
     );
   } catch (error) {
     if (error.response) {
-      console.log(error.response.data.message);
+      errorMessageSignUpPara.textContent = error.response.data.message;
     } else if (error.request) {
       //server/network issue
-      console.log("server unavailable, try again later");
+      errorMessageSignUpPara.textContent =
+        "Server unavailable, please try again later";
     } else {
-      console.log("unexpected error");
+      errorMessageSignUpPara.textContent =
+        "Unexpected error, please try again later";
     }
   }
 }
@@ -441,28 +448,29 @@ async function addUser(user) {
 async function login(user) {
   try {
     const response = await axios.post("/api/auth/login", user);
-    const userName = response.data.userName;
+    const userEmail = response.data.userEmail;
     const token = response.data.token;
     // save token in localStorage to use it in header when fetching the data for specific user
     localStorage.setItem("token", token);
+    localStorage.setItem("email", userEmail);
+    loginWelcomeUserSpan.textContent = userEmail;
 
     fetchData();
-    console.log(`logged in`);
 
     //If all the user verification went well open app view
     loginViewDiv.classList.add("hidden");
     appViewDiv.classList.remove("hidden");
     authSection.classList.add("hidden");
   } catch (error) {
-    {
-      if (error.response) {
-        console.log(error.response.data.message);
-      } else if (error.request) {
-        //server/network issue
-        console.log("server unavailable, try again later");
-      } else {
-        console.log("unexpected error");
-      }
+    if (error.response) {
+      errorMessageLoginPara.textContent = error.response.data.message;
+    } else if (error.request) {
+      //server/network issue
+      errorMessageLoginPara.textContent =
+        "Server unavailable, please try again later";
+    } else {
+      errorMessageLoginPara.textContent =
+        "Unexpected error, please try again later";
     }
   }
 }
@@ -522,14 +530,6 @@ signupForm.addEventListener("submit", async (e) => {
   await addUser(signupDetails);
 
   signupForm.reset();
-
-  // I should rather inform user that registration was successful, please login
-  // and direct to login page
-
-  //If all the user verification went well open app view
-  // signupViewDiv.classList.add("hidden");
-  // appViewDiv.classList.remove("hidden");
-  // authSection.classList.add("hidden");
 });
 
 // Log-out Btn, returns to Log in page
@@ -537,8 +537,9 @@ logOutBtn.addEventListener("click", () => {
   appViewDiv.classList.add("hidden");
   authSection.classList.remove("hidden");
   loginViewDiv.classList.remove("hidden");
-  // After signing out, remove token
+  // After signing out, remove token and user email
   localStorage.removeItem("token");
+  localStorage.removeItem("email");
 });
 
 createFilterOptions();

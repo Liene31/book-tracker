@@ -91,6 +91,12 @@ body {
   cursor: pointer;
 }
 
+.auth .message {
+  color: #db1a1a;
+  font-style: italic;
+  font-size: 0.8rem;
+}
+
 .signup-view {
   display: flex;
 }

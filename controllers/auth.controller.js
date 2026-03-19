@@ -39,6 +39,7 @@ export const authController = {
       const credentials = req.body;
 
       const userFound = await authService.findByCredentials(credentials);
+
       if (!userFound) {
         return res
           .status(401)
@@ -49,6 +50,7 @@ export const authController = {
       res.status(200).json({
         id: userFound._id,
         userName: userFound.userName,
+        userEmail: userFound.email,
         token: token,
       });
     } catch (error) {
