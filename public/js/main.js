@@ -29,8 +29,15 @@ let filterSelection;
 let bookData = [];
 
 const fetchData = async () => {
+  const token = localStorage.getItem("token");
+
   try {
-    const response = await axios.get("/api/books");
+    const response = await axios.get("/api/books", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
     if (response) {
       bookData = response.data;
 
@@ -143,8 +150,13 @@ function createStatusSelect(selectedStatus, bookId) {
 }
 
 async function updateBook(id, modification) {
+  const token = localStorage.getItem("token");
   try {
-    const response = await axios.patch(`/api/books/${id}`, modification);
+    const response = await axios.patch(`/api/books/${id}`, modification, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
     await fetchData();
   } catch (error) {
@@ -332,8 +344,13 @@ closeBookInputBtn.addEventListener("click", () => {
 
 //POST book to backend
 async function addBook(book) {
+  const token = localStorage.getItem("token");
   try {
-    const response = await axios.post("/api/books", book);
+    const response = await axios.post("/api/books", book, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   } catch (error) {
     console.error(error.message);
   }
@@ -371,8 +388,13 @@ bookInput.addEventListener("submit", async (e) => {
 });
 
 async function deleteBook(id) {
+  const token = localStorage.getItem("token");
   try {
-    const response = await axios.delete(`/api/books/${id}`);
+    const response = await axios.delete(`/api/books/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   } catch (error) {
     console.error(error.message);
   }
@@ -400,6 +422,35 @@ async function addUser(user) {
   }
 }
 
+async function login(user) {
+  try {
+    const response = await axios.post("/api/auth/login", user);
+    const userName = response.data.userName;
+    const token = response.data.token;
+    // save token in localStorage to use it in header when fetching the data for specific user
+    localStorage.setItem("token", token);
+
+    fetchData();
+    console.log(`logged in`);
+
+    //If all the user verification went well open app view
+    loginViewDiv.classList.add("hidden");
+    appViewDiv.classList.remove("hidden");
+    authSection.classList.add("hidden");
+  } catch (error) {
+    {
+      if (error.response) {
+        console.log(error.response.data.message);
+      } else if (error.request) {
+        //server/network issue
+        console.log("server unavailable, try again later");
+      } else {
+        console.log("unexpected error");
+      }
+    }
+  }
+}
+
 //Opens Sign-up view
 showSignupBtn.addEventListener("click", () => {
   loginViewDiv.classList.add("hidden");
@@ -420,22 +471,19 @@ demoBtn.addEventListener("click", () => {
 });
 
 //Get user details from Log-in form
-loginForm.addEventListener("submit", (e) => {
+loginForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const loginEmail = loginForm.elements["login-email"].value;
   const loginPassword = loginForm.elements["login-password"].value;
 
   const loginDetails = {
-    loginEmail,
-    loginPassword,
+    email: loginEmail,
+    password: loginPassword,
   };
 
-  loginForm.reset();
+  await login(loginDetails);
 
-  //If all the user verification went well open app view
-  loginViewDiv.classList.add("hidden");
-  appViewDiv.classList.remove("hidden");
-  authSection.classList.add("hidden");
+  loginForm.reset();
 });
 
 //Get user details from Sign-up form
@@ -472,5 +520,4 @@ logOutBtn.addEventListener("click", () => {
   loginViewDiv.classList.remove("hidden");
 });
 
-fetchData();
 createFilterOptions();
